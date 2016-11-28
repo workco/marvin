@@ -9,10 +9,10 @@ const autoprefixer = require('autoprefixer');
 const nodeEnv = process.env.NODE_ENV || 'development';
 const isProduction = nodeEnv === 'production';
 
-const jsSourcePath = path.join(__dirname, './client/js');
+const jsSourcePath = path.join(__dirname, './source/js');
 const buildPath = path.join(__dirname, './build');
-const imgPath = path.join(__dirname, './client/assets/img');
-const sourcePath = path.join(__dirname, './client');
+const imgPath = path.join(__dirname, './source/assets/img');
+const sourcePath = path.join(__dirname, './source');
 
 // Common plugins
 const plugins = [
@@ -160,7 +160,7 @@ module.exports = {
   },
   plugins,
   devServer: {
-    contentBase: isProduction ? './build' : './client',
+    contentBase: isProduction ? './build' : './source',
     historyApiFallback: true,
     port: 3000,
     compress: isProduction,

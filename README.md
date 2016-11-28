@@ -7,6 +7,7 @@
 * [Running in dev mode](#user-content-running-in-dev-mode)
 * [Build (production)](#user-content-build-production)
 * [Linting](#user-content-linting)
+* [Changelog](#user-content-changelog)
 
 
 ## What is this?
@@ -38,7 +39,7 @@ By complete I mean it has examples for:
 - [x] React router
 - [x] Redux
 - [x] Redux Thunk
-- [ ] Redux Dev Tools
+- [x] Redux Dev Tools
 - [x] Immutable reducer data
 - [x] Webpack 2 (development and production config)
 - [x] Hot Module Replacement
@@ -88,6 +89,26 @@ Build will be placed in the `build` folder.
 $ npm run build
 ```
 
+If your app is not running on the server root you should change `publicPath` at two places.
+
+In `webpack.config.js` (ATM line 147):
+
+```
+output: {
+  path: buildPath,
+  publicPath: '/your-app/',
+  filename: 'app-[hash].js',
+},
+```
+
+and in `source/js/routes` (ATM line 9):
+
+```
+const publicPath = '/your-app/';
+```
+
+Don't forget the trailing slash (`/`). In development visit `http://localhost:3000/your-app/`.
+
 ## Linting
 
 For linting I'm using [eslint-config-airbnb](https://www.npmjs.com/package/eslint-config-airbnb),
@@ -96,3 +117,15 @@ but some options are overridden to my personal preferences.
 ```
 $ npm run lint
 ```
+
+## Changelog
+
+#### 0.0.2
+
+* Added Redux Dev Tools.
+* Renamed `client` to `source`
+* Made sure `logger` and `DevTools` are loaded only in development
+
+#### 0.0.1
+
+Initial release

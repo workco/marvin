@@ -6,16 +6,18 @@ import Dashboard from 'views/Dashboard';
 import About from 'views/About';
 import NotFound from 'views/NotFound';
 
+const publicPath = '/';
+
 export const routeCodes = {
-  DASHBOARD: '/',
-  ABOUT: '/about',
+  DASHBOARD: publicPath,
+  ABOUT: `${ publicPath }about`,
 };
 
 export default class Routes extends Component {
   render() {
     return (
       <Router history={ browserHistory }>
-        <Route path='/' component={ App }>
+        <Route path={ publicPath } component={ App }>
           <IndexRoute component={ Dashboard } />
           <Route path={ routeCodes.POCKET_AUTH } component={ Dashboard } />
           <Route path={ routeCodes.ABOUT } component={ About } />
