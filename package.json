@@ -1,6 +1,6 @@
 {
   "name": "react-redux-webpack2-boilerplate",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": false,
   "license": "MIT",
   "main": "index.js",
@@ -8,7 +8,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "./node_modules/webpack-dashboard/bin/webpack-dashboard.js -t 'React-Redux Boilerplate' -- ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "build": "rm -rf ./build && NODE_ENV=\"production\" ./node_modules/webpack/bin/webpack.js",
-    "lint": "eslint ./client/js ./webpack.config.js -f table --ext .js --ext .jsx || true"
+    "lint-break-on-errors": "./node_modules/eslint/bin/eslint.js ./source/js ./webpack.config.js -f table --ext .js --ext .jsx",
+    "lint": "./node_modules/eslint/bin/eslint.js ./source/js ./webpack.config.js -f table --ext .js --ext .jsx || true",
+    "preview": "NODE_ENV=\"production\" ./node_modules/webpack-dashboard/bin/webpack-dashboard.js -t 'Preview Mode - React-Redux Boilerplate' -- ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "hook-add": "./node_modules/prepush/bin/cli.js install",
+    "hook-remove": "./node_modules/prepush/bin/cli.js remove"
   },
   "devDependencies": {
     "autoprefixer": "^6.5.3",
@@ -35,6 +39,7 @@
     "html-webpack-plugin": "^2.24.1",
     "node-sass": "^3.13.0",
     "postcss-loader": "^1.1.1",
+    "prepush": "^3.1.11",
     "redux-devtools": "^3.3.1",
     "redux-devtools-dock-monitor": "^1.1.1",
     "redux-devtools-log-monitor": "^1.1.1",
@@ -73,5 +78,6 @@
   "bugs": {
     "url": "https://github.com/Stanko/react-redux-webpack2-boilerplate/issues"
   },
-  "homepage": "https://github.com/Stanko/react-redux-webpack2-boilerplate#readme"
+  "homepage": "https://github.com/Stanko/react-redux-webpack2-boilerplate#readme",
+  "prepush" : [ "npm run lint-break-on-errors --silent" ]
 }
