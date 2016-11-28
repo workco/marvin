@@ -6,7 +6,9 @@
 * [Setup](#user-content-setup)
 * [Running in dev mode](#user-content-running-in-dev-mode)
 * [Build (production)](#user-content-build-production)
+* [Running in preview production mode](#user-content-running-in-preview-production-mode)
 * [Linting](#user-content-linting)
+* [Git hooks](#user-content-git-hooks)
 * [Changelog](#user-content-changelog)
 
 
@@ -49,9 +51,9 @@ By complete I mean it has examples for:
 - [ ] Generating icon font from SVGs
 - [x] Linting
 - [x] Included `es6-promise` and `isomorphic-fetch`
-- [ ] Preview production build
+- [x] Preview production build
 - [x] File imports relative to the app root
-- [ ] Git hooks - lint before commit
+- [x] Git hooks - lint before push
 
 Universal may be added at some point.
 
@@ -109,6 +111,16 @@ const publicPath = '/your-app/';
 
 Don't forget the trailing slash (`/`). In development visit `http://localhost:3000/your-app/`.
 
+## Running in preview production mode
+
+This command will start webpack dev server, but with `NODE_ENV` set to `production`.
+Everything will be minified and served.
+Hot reload will not work, so you need to refresh the page manually after changing the code.
+
+```
+npm run preview
+```
+
 ## Linting
 
 For linting I'm using [eslint-config-airbnb](https://www.npmjs.com/package/eslint-config-airbnb),
@@ -118,7 +130,32 @@ but some options are overridden to my personal preferences.
 $ npm run lint
 ```
 
+## Git hooks
+
+Linting pre-push hook is not enabled by default.
+It will prevent the push if lint task fails,
+but you need to add it manually by running:
+
+```
+npm run hook-add
+```
+
+To remove it, run this task:
+
+```
+npm run hook-remove
+```
+
+
+
+-----
+
 ## Changelog
+
+#### 0.0.3
+
+* Added pre-push git hook
+* Added `preview` task
 
 #### 0.0.2
 
