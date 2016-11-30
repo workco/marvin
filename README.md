@@ -48,7 +48,6 @@ By complete I mean it has examples for:
 - [x] Babel - static props, decorators
 - [x] SASS with autoprefixing
 - [x] Webpack dashboard
-- [ ] Generating icon font from SVGs
 - [x] Linting
 - [x] Included `es6-promise` and `isomorphic-fetch`
 - [x] Preview production build
@@ -59,6 +58,13 @@ Universal may be added at some point.
 
 - [ ] Universal rendering
 - [ ] Server async data
+
+Other nice to have features
+
+- [ ] Generating icon font from SVGs
+- [ ] Modernizr
+- [ ] Google analytics
+- [ ] Error reporting (not sure if this should be the part of the boilerplate)
 
 ## Setup
 
