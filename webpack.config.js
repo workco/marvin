@@ -59,7 +59,7 @@ const rules = [
   {
     test: /\.(png|gif|jpg|svg)$/,
     include: imgPath,
-    use: 'url-loader?limit=20480&name=[name]-[hash].[ext]',
+    use: 'url-loader?limit=20480&name=assets/[name]-[hash].[ext]',
   },
 ];
 
@@ -114,11 +114,13 @@ if (isProduction) {
       exclude: /node_modules/,
       use: [
         'style-loader',
+        // Using source maps breaks urls in the CSS loader
+        // https://github.com/webpack/css-loader/issues/232
+        // This comment solves it, but breaks testing from a local network
+        // https://github.com/webpack/css-loader/issues/232#issuecomment-240449998
+        // 'css-loader?sourceMap',
         'css-loader',
         'postcss-loader',
-        // Using source maps breaks urls in the CSS loader
-        // https://github.com/webpack/css-loader/issues/296
-        // 'css-loader?sourceMap',
         'sass-loader?sourceMap',
       ],
     }

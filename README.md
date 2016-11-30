@@ -33,7 +33,7 @@ By complete I mean it has examples for:
 
 ![Example dashboard](http://i.imgur.com/z4Cpmdb.png)
 
-<sup>1</sup> Using source maps breaks urls in the CSS loader - https://github.com/webpack/css-loader/issues/296
+<sup>1</sup> Using source maps breaks urls in the CSS loader - https://github.com/webpack/css-loader/issues/232. Try [this](https://github.com/webpack/css-loader/issues/232#issuecomment-240449998) to fix it (but it breaks testing from local network).
 
 ## Features
 
