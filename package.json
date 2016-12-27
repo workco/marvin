@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "./node_modules/webpack-dashboard/bin/webpack-dashboard.js -t 'React-Redux Boilerplate' -- ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "start": "webpack-dashboard  -- webpack-dev-server --colors --no-info",
     "build": "rm -rf ./build && NODE_ENV=\"production\" ./node_modules/webpack/bin/webpack.js",
     "lint-break-on-errors": "./node_modules/eslint/bin/eslint.js ./source/js ./webpack.config.js -f table --ext .js --ext .jsx",
     "lint": "./node_modules/eslint/bin/eslint.js ./source/js ./webpack.config.js -f table --ext .js --ext .jsx || true",
