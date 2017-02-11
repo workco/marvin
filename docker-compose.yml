@@ -1,0 +1,8 @@
+version: '2'
+services:
+   app:
+      image: app
+      build: ./
+      container_name: app
+      ports:
+         - "3000:3000"
