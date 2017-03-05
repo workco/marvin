@@ -158,6 +158,10 @@ npm run hook-remove
 
 ## Changelog
 
+#### 0.1.0
+
+* Updated `webpack` to a stable version
+
 #### 0.0.3
 
 * Added pre-push git hook
