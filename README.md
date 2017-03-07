@@ -16,8 +16,8 @@
 
 Boilerplate I extracted from a small real world project.
 
-Webpack 2 is still in beta, but at this point is the only version
-that I managed to run everything I wanted, including hot module replacement.
+~~Webpack 2 is still in beta, but at this point is the only version
+that I managed to run everything I wanted, including hot module replacement.~~
 
 This boilerplate includes complete, minimal react app.
 By complete I mean it has examples for:
