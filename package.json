@@ -1,18 +1,18 @@
 {
   "name": "react-redux-webpack2-boilerplate",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": false,
   "license": "MIT",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "./node_modules/webpack-dashboard/bin/webpack-dashboard.js -t 'React-Redux Boilerplate' -- ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-    "build": "rm -rf ./build && NODE_ENV=\"production\" ./node_modules/webpack/bin/webpack.js",
-    "lint-break-on-errors": "./node_modules/eslint/bin/eslint.js ./source/js ./webpack.config.js -f table --ext .js --ext .jsx",
-    "lint": "./node_modules/eslint/bin/eslint.js ./source/js ./webpack.config.js -f table --ext .js --ext .jsx || true",
+    "start": "webpack-dashboard -t 'React-Redux Boilerplate' -- webpack-dev-server --colors --no-info",
+    "build": "rm -rf ./build && NODE_ENV=\"production\" webpack",
+    "lint-break-on-errors": "eslint ./source/js ./webpack.config.js -f table --ext .js --ext .jsx",
+    "lint": "eslint ./source/js ./webpack.config.js -f table --ext .js --ext .jsx || true",
     "preview": "NODE_ENV=\"production\" ./node_modules/webpack-dashboard/bin/webpack-dashboard.js -t 'Preview Mode - React-Redux Boilerplate' -- ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-    "hook-add": "./node_modules/prepush/bin/cli.js install",
-    "hook-remove": "./node_modules/prepush/bin/cli.js remove"
+    "hook-add": "prepush install",
+    "hook-remove": "prepush remove"
   },
   "devDependencies": {
     "autoprefixer": "^6.5.3",
@@ -23,7 +23,7 @@
     "babel-plugin-transform-class-properties": "^6.6.0",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-plugin-transform-runtime": "^6.6.0",
-    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-es2015": "^6.22.0",
     "babel-preset-react": "^6.5.0",
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "^6.16.0",

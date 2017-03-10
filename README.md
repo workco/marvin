@@ -54,10 +54,13 @@ By complete I mean it has examples for:
 - [x] File imports relative to the app root
 - [x] Git hooks - lint before push
 
-Universal may be added at some point.
+## TODO
 
+- [ ] Tree shaking build
+- [ ] Switch to [redux-saga](https://github.com/redux-saga/redux-saga)
 - [ ] Universal rendering
 - [ ] Server async data
+- [ ] Internationalization
 
 Other nice to have features
 
@@ -157,6 +160,10 @@ npm run hook-remove
 -----
 
 ## Changelog
+
+#### 0.1.1
+
+* Fixed running it on Windows machines
 
 #### 0.1.0
 
