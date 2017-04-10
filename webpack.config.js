@@ -19,18 +19,18 @@ const plugins = [
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
     minChunks: Infinity,
-    filename: 'vendor-[hash].js',
+    filename: 'vendor-[hash].js'
   }),
   new webpack.DefinePlugin({
     'process.env': {
-      NODE_ENV: JSON.stringify(nodeEnv),
-    },
+      NODE_ENV: JSON.stringify(nodeEnv)
+    }
   }),
   new webpack.NamedModulesPlugin(),
   new HtmlWebpackPlugin({
     template: path.join(sourcePath, 'index.html'),
     path: buildPath,
-    filename: 'index.html',
+    filename: 'index.html'
   }),
   new webpack.LoaderOptionsPlugin({
     options: {
@@ -38,13 +38,13 @@ const plugins = [
         autoprefixer({
           browsers: [
             'last 3 version',
-            'ie >= 10',
-          ],
-        }),
+            'ie >= 10'
+          ]
+        })
       ],
-      context: sourcePath,
-    },
-  }),
+      context: sourcePath
+    }
+  })
 ];
 
 // Common rules
@@ -53,14 +53,14 @@ const rules = [
     test: /\.(js|jsx)$/,
     exclude: /node_modules/,
     use: [
-      'babel-loader',
-    ],
+      'babel-loader'
+    ]
   },
   {
     test: /\.(png|gif|jpg|svg)$/,
     include: imgPath,
-    use: 'url-loader?limit=20480&name=assets/[name]-[hash].[ext]',
-  },
+    use: 'url-loader?limit=20480&name=assets/[name]-[hash].[ext]'
+  }
 ];
 
 if (isProduction) {
@@ -68,7 +68,7 @@ if (isProduction) {
   plugins.push(
     new webpack.LoaderOptionsPlugin({
       minimize: true,
-      debug: false,
+      debug: false
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
@@ -81,11 +81,11 @@ if (isProduction) {
         dead_code: true,
         evaluate: true,
         if_return: true,
-        join_vars: true,
+        join_vars: true
       },
       output: {
-        comments: false,
-      },
+        comments: false
+      }
     }),
     new ExtractTextPlugin('style-[hash].css')
   );
@@ -96,8 +96,8 @@ if (isProduction) {
       test: /\.scss$/,
       loader: ExtractTextPlugin.extract({
         fallback: 'style-loader',
-        use: 'css-loader!postcss-loader!sass-loader',
-      }),
+        use: 'css-loader!postcss-loader!sass-loader'
+      })
     }
   );
 } else {
@@ -121,8 +121,8 @@ if (isProduction) {
         // 'css-loader?sourceMap',
         'css-loader',
         'postcss-loader',
-        'sass-loader?sourceMap',
-      ],
+        'sass-loader?sourceMap'
+      ]
     }
   );
 }
@@ -142,23 +142,23 @@ module.exports = {
       'react-router',
       'react',
       'redux-thunk',
-      'redux',
-    ],
+      'redux'
+    ]
   },
   output: {
     path: buildPath,
     publicPath: '/',
-    filename: 'app-[hash].js',
+    filename: 'app-[hash].js'
   },
   module: {
-    rules,
+    rules
   },
   resolve: {
     extensions: ['.webpack-loader.js', '.web-loader.js', '.loader.js', '.js', '.jsx'],
     modules: [
       path.resolve(__dirname, 'node_modules'),
-      jsSourcePath,
-    ],
+      jsSourcePath
+    ]
   },
   plugins,
   devServer: {
@@ -168,7 +168,7 @@ module.exports = {
     compress: isProduction,
     inline: !isProduction,
     hot: !isProduction,
-    host: '0.0.0.0',
+    host: '127.0.0.1',
     stats: {
       assets: true,
       children: false,
@@ -180,8 +180,8 @@ module.exports = {
       version: false,
       warnings: true,
       colors: {
-        green: '\u001b[32m',
-      },
-    },
-  },
+        green: '\u001b[32m'
+      }
+    }
+  }
 };

@@ -7,7 +7,7 @@ import bookImg from '../../../assets/img/book2.jpg';
   asyncData: state.app.get('asyncData'),
   asyncError: state.app.get('asyncError'),
   asyncLoading: state.app.get('asyncLoading'),
-  counter: state.app.get('counter'),
+  counter: state.app.get('counter')
 }))
 export default class Dashboard extends Component {
   static propTypes = {
@@ -16,8 +16,8 @@ export default class Dashboard extends Component {
     asyncLoading: PropTypes.bool,
     counter: PropTypes.number,
     // from react-redux connect
-    dispatch: PropTypes.func,
-  }
+    dispatch: PropTypes.func
+  };
 
   constructor() {
     super();
@@ -43,7 +43,7 @@ export default class Dashboard extends Component {
       asyncData,
       asyncError,
       asyncLoading,
-      counter,
+      counter
     } = this.props;
 
     return (

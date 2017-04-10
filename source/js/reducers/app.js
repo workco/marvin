@@ -11,7 +11,7 @@ const initialState = Map({
   counter: 0,
   asyncLoading: false,
   asyncError: null,
-  asyncData: null,
+  asyncData: null
 });
 
 const actionsMap = {
@@ -19,7 +19,7 @@ const actionsMap = {
     const counter = state.get('counter') + 1;
 
     return state.merge({
-      counter,
+      counter
     });
   },
 
@@ -27,21 +27,21 @@ const actionsMap = {
   [TEST_ASYNC_ACTION_START]: (state) => {
     return state.merge({
       asyncLoading: true,
-      asyncError: null,
+      asyncError: null
     });
   },
   [TEST_ASYNC_ACTION_ERROR]: (state, action) => {
     return state.merge({
       asyncLoading: false,
-      asyncError: action.data,
+      asyncError: action.data
     });
   },
   [TEST_ASYNC_ACTION_SUCCESS]: (state, action) => {
     return state.merge({
       asyncLoading: false,
-      asyncData: action.data,
+      asyncData: action.data
     });
-  },
+  }
 };
 
 export default function reducer(state = initialState, action = {}) {
