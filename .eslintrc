@@ -31,8 +31,8 @@ rules:
   quote-props: 0
   template-curly-spacing: [2, "always"]
   comma-dangle: ["error", {
-    "arrays": "always-multiline",
-    "objects": "always-multiline",
+    "arrays": "never",
+    "objects": "never",
     "imports": "always-multiline",
     "exports": "always-multiline",
     "functions": "never"

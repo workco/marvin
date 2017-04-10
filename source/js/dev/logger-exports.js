@@ -20,7 +20,7 @@ const logger = createLogger({
     });
 
     return newState;
-  },
+  }
 });
 
 export default logger;

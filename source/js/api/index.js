@@ -16,5 +16,5 @@ function testAsync() {
 }
 
 export default {
-  testAsync,
+  testAsync
 };

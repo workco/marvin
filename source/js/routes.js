@@ -10,7 +10,7 @@ const publicPath = '/';
 
 export const routeCodes = {
   DASHBOARD: publicPath,
-  ABOUT: `${ publicPath }about`,
+  ABOUT: `${ publicPath }about`
 };
 
 export default class Routes extends Component {
