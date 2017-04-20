@@ -161,6 +161,11 @@ npm run hook-remove
 
 ## Changelog
 
+#### 0.1.2
+
+* Fixed duplicating vendor bundle code
+* Reduced overall bundle size by disabling `devtool` in production
+
 #### 0.1.1
 
 * Fixed running it on Windows machines

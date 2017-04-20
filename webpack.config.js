@@ -18,8 +18,11 @@ const sourcePath = path.join(__dirname, './source');
 const plugins = [
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
-    minChunks: Infinity,
     filename: 'vendor-[hash].js',
+    minChunks(module) {
+      const context = module.context;
+      return context && context.indexOf('node_modules') >= 0;
+    },
   }),
   new webpack.DefinePlugin({
     'process.env': {
@@ -128,22 +131,10 @@ if (isProduction) {
 }
 
 module.exports = {
-  devtool: isProduction ? 'eval' : 'source-map',
+  devtool: isProduction ? false : 'source-map',
   context: jsSourcePath,
   entry: {
     js: './index.js',
-    vendor: [
-      'babel-polyfill',
-      'es6-promise',
-      'immutable',
-      'isomorphic-fetch',
-      'react-dom',
-      'react-redux',
-      'react-router',
-      'react',
-      'redux-thunk',
-      'redux',
-    ],
   },
   output: {
     path: buildPath,
