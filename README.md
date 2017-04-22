@@ -41,7 +41,7 @@ By complete I mean it has examples for:
 - [x] React router
 - [x] Redux
 - [x] Redux Thunk
-- [x] Redux Dev Tools
+- [x] Redux DevTools (you need to have [browser extension](https://github.com/zalmoxisus/redux-devtools-extension) installed)
 - [x] Immutable reducer data
 - [x] Webpack 2 (development and production config)
 - [x] Hot Module Replacement
@@ -56,7 +56,7 @@ By complete I mean it has examples for:
 
 ## TODO
 
-- [ ] Tree shaking build
+- [x] Tree shaking build
 - [ ] Switch to [redux-saga](https://github.com/redux-saga/redux-saga)
 - [ ] Universal rendering
 - [ ] Server async data
@@ -160,6 +160,11 @@ npm run hook-remove
 -----
 
 ## Changelog
+
+#### 0.1.3
+
+* Made sure tree shaking is working
+* Removed DevTools from the code, but it still works if you have browser extension
 
 #### 0.1.2
 

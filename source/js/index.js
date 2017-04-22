@@ -8,7 +8,6 @@ import logger from 'dev/logger';
 
 import rootReducer from 'reducers';
 import Routes from 'routes';
-import DevTools from 'dev/redux-dev-tools';
 
 // Load SCSS
 import '../scss/app.scss';
@@ -32,7 +31,8 @@ if (isProduction) {
   const middleware = applyMiddleware(thunk, logger);
   const enhancer = compose(
     middleware,
-    DevTools.instrument()
+    // Enable DevTools if browser extension is installed
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() // eslint-disable-line
   );
 
   store = createStore(
@@ -45,12 +45,7 @@ if (isProduction) {
 // Render it to DOM
 ReactDOM.render(
   <Provider store={ store }>
-    { isProduction ?
-      <Routes /> :
-      <div>
-        <Routes />
-        <DevTools />
-      </div> }
+    <Routes />
   </Provider>,
   document.getElementById('root')
 );
