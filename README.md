@@ -161,6 +161,10 @@ npm run hook-remove
 
 ## Changelog
 
+#### 0.1.4
+
+* Resolved React 15.5 [deprecation warnings](https://facebook.github.io/react/blog/2017/04/07/react-v15.5.0.html#new-deprecation-warnings)
+
 #### 0.1.3
 
 * Made sure tree shaking is working
