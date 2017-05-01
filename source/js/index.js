@@ -29,11 +29,18 @@ if (isProduction) {
   // In development mode beside thunk
   // logger and DevTools are added
   const middleware = applyMiddleware(thunk, logger);
-  const enhancer = compose(
-    middleware,
-    // Enable DevTools if browser extension is installed
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() // eslint-disable-line
-  );
+  let enhancer;
+
+  // Enable DevTools if browser extension is installed
+  if (window.__REDUX_DEVTOOLS_EXTENSION__) { // eslint-disable-line
+    enhancer = compose(
+      middleware,
+      window.__REDUX_DEVTOOLS_EXTENSION__() // eslint-disable-line
+    );
+  } else {
+    enhancer = compose(middleware);
+  }
+
 
   store = createStore(
     rootReducer,
