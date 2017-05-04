@@ -149,7 +149,7 @@ module.exports = {
   },
   plugins,
   devServer: {
-    contentBase: isProduction ? './build' : './source',
+    contentBase: isProduction ? buildPath : sourcePath,
     historyApiFallback: true,
     port: 3000,
     compress: isProduction,
