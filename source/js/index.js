@@ -10,7 +10,7 @@ import rootReducer from 'reducers';
 import Routes from 'routes';
 
 // Load SCSS
-import '../scss/app.scss';
+import '../scss/screen.scss';
 
 const isProduction = process.env.NODE_ENV === 'production';
 

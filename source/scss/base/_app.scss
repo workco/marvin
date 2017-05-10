@@ -1,35 +1,63 @@
 body {
-  background: #1C1E20;
+  font-size: 16px;
+
+  * {
+    background: $global-background-color;
+    color: $white;
+  }
+
+  a {
+    color: inherit; /* blue colors for links too */
+    text-decoration: inherit; /* no underline */
+  }
 }
 
-.App {
-  margin: 20px auto;
-  max-width: 500px;
-  width: calc(100% - 40px);
-  background: #f5f6f7;
-  padding: 20px;
-  border-radius: 3px;
+.app {
+  height: calc(100% - 50px);
+  position: absolute;
+  top: 50px;
+  width: 100%;
 }
 
-.Menu a {
-  display: inline-block;
-  padding: 5px 0;
-  margin-right: 10px;
+.menu {
+  background-color: $global-background-color;
+  border-bottom: $border-standardized;
+  color: $white;
+  display: flex;
+  flex-direction: column;
+  height: $main-header-height;
+  position: absolute;
+  top: -50px;
+  width: 100%;
+
+  .logo-container {
+    align-self: flex-start;
+    display: flex;
+    height: $main-header-height;
+    justify-content: flex-start;
+    padding: 5px 10px;
+    width: 200px;
+
+    .rr-logo {
+      height: 100%;
+    }
+  }
 }
 
-.BackgroundImgExample {
-  width: 250px;
-  height: 141px;
-  background: url(../assets/img/book1.jpg) no-repeat;
-  background-size: 100% auto;
-}
+.app-content {
+  display: flex;
+  height: 100%;
+  position: absolute;
+  width: 100%;
 
-.ImgExample {
-  width: 250px;
-}
+  .fleet-list {
+    border-right: $border-standardized;
+    height: 100%;
+    width: 20%;
+  }
 
-hr {
-  border: 0;
-  border-top: 1px solid #ddd;
-  margin: 20px 0;
+  .main-view {
+    height: 100%;
+    width: 80%;
+  }
 }
