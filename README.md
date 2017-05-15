@@ -86,9 +86,15 @@ $ npm start
 Visit `http://localhost:3000/` from your browser of choice.
 Server is visible from the local network as well.
 
-![Running in the iTerm2](http://i.imgur.com/IxamMBh.png)
+### Running it with [webpack dashboard](https://github.com/FormidableLabs/webpack-dashboard)
 
-It is using [webpack dashboard](https://github.com/FormidableLabs/webpack-dashboard), so please note the following:
+```
+$ npm run dev
+```
+
+**Note for Windows users:** webpack dashboard still have issues with Windows, so use `npm start` until those are resolved.
+
+![Running in the iTerm2](http://i.imgur.com/IxamMBh.png)
 
 **OS X Terminal.app users:** Make sure that **View → Allow Mouse Reporting** is enabled, otherwise scrolling through logs and modules won't work. If your version of Terminal.app doesn't have this feature, you may want to check out an alternative such as [iTerm2](https://www.iterm2.com/).
 
@@ -160,6 +166,11 @@ npm run hook-remove
 -----
 
 ## Changelog
+
+#### 0.1.5
+
+* `npm start` is not using `webpack-dashboard` by default cause it still has issues with Windows
+* Moved `prop-types` from `devDependencies` to `dependencies`
 
 #### 0.1.4
 

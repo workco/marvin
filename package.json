@@ -1,12 +1,13 @@
 {
   "name": "react-redux-webpack2-boilerplate",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "private": false,
   "license": "MIT",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dashboard -t 'React-Redux Boilerplate' -- webpack-dev-server --colors --no-info",
+    "start": "webpack-dev-server --colors",
+    "dev": "webpack-dashboard -t 'React-Redux Boilerplate' -- webpack-dev-server --colors --no-info",
     "build": "rm -rf ./build && NODE_ENV=\"production\" webpack",
     "lint-break-on-errors": "eslint ./source/js ./webpack.config.js -f table --ext .js --ext .jsx",
     "lint": "eslint ./source/js ./webpack.config.js -f table --ext .js --ext .jsx || true",
@@ -40,13 +41,12 @@
     "node-sass": "^3.13.0",
     "postcss-loader": "^1.1.1",
     "prepush": "^3.1.11",
-    "prop-types": "^15.5.8",
     "redux-logger": "^2.7.4",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.7",
     "webpack": "^2.2.1",
-    "webpack-dashboard": "^0.2.0",
+    "webpack-dashboard": "^0.3.0",
     "webpack-dev-server": "^2.2.1"
   },
   "dependencies": {
@@ -54,6 +54,7 @@
     "es6-promise": "^3.1.2",
     "immutable": "^3.8.1",
     "isomorphic-fetch": "^2.2.1",
+    "prop-types": "^15.5.8",
     "react": "^15.5.0",
     "react-dom": "^15.5.0",
     "react-redux": "^4.4.0",
