@@ -18,14 +18,14 @@ const icons = requireAll(svgIcons).reduce(
 
 export default class Icon extends Component {
   render() {
-    let { className, width, height, glyph, style } = this.props;
+    const { className, width, height, glyph, style } = this.props;
 
     return (
       <svg
         style={ style }
         className={ className }
-        width={ parseInt(width) }
-        height={ parseInt(height) }
+        width={ parseInt(width, 10) }
+        height={ parseInt(height, 10) }
       >
         <use xlinkHref={ icons[glyph] } />
       </svg>
