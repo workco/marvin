@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
-import { IndexLink, Link } from 'react-router';
+import { IndexLink } from 'react-router';
 import { routeCodes } from '../../routes';
+import logoImg from '../../../assets/img/logo_small.png';
 
 export default class Menu extends Component {
+  componentWillMount() {
+    const logoPath = '../../../assets/img/logo_small.png';
+    this.setState({ logoPath });
+  }
 
   render() {
     return (
-      <div className='Menu'>
-        <IndexLink to={ routeCodes.DASHBOARD }>
-          Dashboard
+      <div className='menu'>
+        <IndexLink to={ routeCodes.DASHBOARD } className='logo-container'>
+          <img className='rr-logo' src={ logoImg } alt='Rolls Royce' />
         </IndexLink>
-        <Link to={ routeCodes.ABOUT }>
-          About
-        </Link>
-        <Link to='404'>
-          404
-        </Link>
       </div>
     );
   }
