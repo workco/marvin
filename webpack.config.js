@@ -67,6 +67,7 @@ const rules = [
           spriteFilename: 'icons-sprite.svg',
         },
       },
+      'svgo-loader',
     ],
     include: iconPath,
   },
