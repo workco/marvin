@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { testAction, testAsync } from 'actions/app';
+import Icon from '../../components/Global/Icon';
 import bookImg from '../../../assets/img/book2.jpg';
+import svgImg from '../../../assets/img/svgExample.svg';
 
 @connect(state => ({
   asyncData: state.app.get('asyncData'),
@@ -18,7 +20,7 @@ export default class Dashboard extends Component {
     counter: PropTypes.number,
     // from react-redux connect
     dispatch: PropTypes.func,
-  }
+  };
 
   constructor() {
     super();
@@ -40,20 +42,14 @@ export default class Dashboard extends Component {
   }
 
   render() {
-    const {
-      asyncData,
-      asyncError,
-      asyncLoading,
-      counter,
-    } = this.props;
-
+    const { asyncData, asyncError, asyncLoading, counter } = this.props;
     return (
       <div className='Dashboard'>
         <h2>Examples</h2>
         <hr />
         <div>
           <h3>Synchronous action</h3>
-          <p>{ counter }</p>
+          <p>{counter}</p>
           <button onClick={ this.handleTestButtonClick }>
             Increase counter
           </button>
@@ -61,13 +57,10 @@ export default class Dashboard extends Component {
         <hr />
         <div>
           <h3>Async action example</h3>
-          <p>{ asyncData }</p>
-          { asyncLoading && <p>Loading...</p> }
-          { asyncError && <p>Error: { asyncError }</p> }
-          <button
-            disabled={ asyncLoading }
-            onClick={ this.handleAsyncButtonClick }
-          >
+          <p>{asyncData}</p>
+          {asyncLoading && <p>Loading...</p>}
+          {asyncError && <p>Error: {asyncError}</p>}
+          <button disabled={ asyncLoading } onClick={ this.handleAsyncButtonClick }>
             Get async data
           </button>
         </div>
@@ -78,6 +71,14 @@ export default class Dashboard extends Component {
 
           <h3>Image imported to the component</h3>
           <img src={ bookImg } alt='' className='ImgExample' />
+
+          <h3>Import icon set</h3>
+          <Icon glyph='square' style={ { marginRight: '10px' } } />
+          <Icon glyph='circle' style={ { marginRight: '10px' } } />
+          <Icon glyph='triangle' />
+
+          <h3>Import regular svg</h3>
+          <img src={ svgImg } alt='' className='SvgExample' width='200' />
         </div>
       </div>
     );
