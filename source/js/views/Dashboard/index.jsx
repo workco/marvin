@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { testAction, testAsync } from 'actions/app';
-import Icon from '../../components/Global/Icon';
+import Icon from 'components/Global/Icon';
 import bookImg from '../../../assets/img/book2.jpg';
 import svgImg from '../../../assets/img/svgExample.svg';
 
@@ -20,7 +20,7 @@ export default class Dashboard extends Component {
     counter: PropTypes.number,
     // from react-redux connect
     dispatch: PropTypes.func,
-  };
+  }
 
   constructor() {
     super();
@@ -42,14 +42,20 @@ export default class Dashboard extends Component {
   }
 
   render() {
-    const { asyncData, asyncError, asyncLoading, counter } = this.props;
+    const {
+      asyncData,
+      asyncError,
+      asyncLoading,
+      counter,
+    } = this.props;
+
     return (
       <div className='Dashboard'>
         <h2>Examples</h2>
         <hr />
         <div>
           <h3>Synchronous action</h3>
-          <p>{counter}</p>
+          <p>{ counter }</p>
           <button onClick={ this.handleTestButtonClick }>
             Increase counter
           </button>
@@ -57,10 +63,13 @@ export default class Dashboard extends Component {
         <hr />
         <div>
           <h3>Async action example</h3>
-          <p>{asyncData}</p>
-          {asyncLoading && <p>Loading...</p>}
-          {asyncError && <p>Error: {asyncError}</p>}
-          <button disabled={ asyncLoading } onClick={ this.handleAsyncButtonClick }>
+          <p>{ asyncData }</p>
+          { asyncLoading && <p>Loading...</p> }
+          { asyncError && <p>Error: { asyncError }</p> }
+          <button
+            disabled={ asyncLoading }
+            onClick={ this.handleAsyncButtonClick }
+          >
             Get async data
           </button>
         </div>

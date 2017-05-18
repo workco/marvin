@@ -18,7 +18,13 @@ const icons = requireAll(svgIcons).reduce(
 
 export default class Icon extends Component {
   render() {
-    const { className, width, height, glyph, style } = this.props;
+    const {
+      className,
+      width,
+      height,
+      glyph,
+      style,
+    } = this.props;
 
     return (
       <svg
