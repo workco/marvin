@@ -4,6 +4,7 @@ const path = require('path');
 const DashboardPlugin = require('webpack-dashboard/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const SpritePlugin = require('svg-sprite-loader/plugin');
 const autoprefixer = require('autoprefixer');
 
 const nodeEnv = process.env.NODE_ENV || 'development';
@@ -12,10 +13,13 @@ const isProduction = nodeEnv === 'production';
 const jsSourcePath = path.join(__dirname, './source/js');
 const buildPath = path.join(__dirname, './build');
 const imgPath = path.join(__dirname, './source/assets/img');
+const iconPath = path.join(__dirname, './source/assets/icons');
 const sourcePath = path.join(__dirname, './source');
+
 
 // Common plugins
 const plugins = [
+  new SpritePlugin(),
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
     filename: 'vendor-[hash].js',
@@ -58,6 +62,20 @@ const rules = [
     use: [
       'babel-loader',
     ],
+  },
+  {
+    test: /icons\/.*\.svg$/,
+    use: [
+      {
+        loader: 'svg-sprite-loader',
+        options: {
+          extract: true,
+          spriteFilename: 'icons-sprite.svg',
+        },
+      },
+      'svgo-loader',
+    ],
+    include: iconPath,
   },
   {
     test: /\.(png|gif|jpg|svg)$/,
