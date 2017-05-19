@@ -1,4 +1,14 @@
-# React and Redux, Webpack 2 boilerplate
+# Marvin ★★
+
+React and Redux, Webpack 2 boilerplate.
+
+Marvin is internal project by [Work & Co](https://work.co).
+We love React and use it a lot. So Marvin is meant to be a starting point for our React projects.
+But as we love open source too, it is publicly available for anyone interested in using it.
+
+![Marvin](/marvin.jpg)
+
+Name comes from a fictional character [Marvin](https://en.wikipedia.org/wiki/Marvin_(character)), android from the [The Hitchhiker's Guide to the Galaxy](https://en.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy) book as a homage to it's author [Douglas Adams](https://en.wikipedia.org/wiki/Douglas_Adams).
 
 ## Table of contents
 * [What is this?](#user-content-what-is-this)
@@ -14,13 +24,10 @@
 
 ## What is this?
 
-Boilerplate I extracted from a small real world project.
+Boilerplate for kicking off React/Redux applications.
 
-~~Webpack 2 is still in beta, but at this point is the only version
-that I managed to run everything I wanted, including hot module replacement.~~
-
-This boilerplate includes complete, minimal react app.
-By complete I mean it has examples for:
+It includes complete, minimal react app.
+By complete we mean it has examples for:
 
 - components (both container/views and regular ones)
 - routes
@@ -31,7 +38,7 @@ By complete I mean it has examples for:
 - using assets (in CSS and components)
 - imports relative to the app root
 
-![Example dashboard](http://i.imgur.com/z4Cpmdb.png)
+![Example dashboard](/marvin-screenshot.png)
 
 <sup>1</sup> Using source maps breaks urls in the CSS loader - https://github.com/webpack/css-loader/issues/232. Try [this](https://github.com/webpack/css-loader/issues/232#issuecomment-240449998) to fix it (but it breaks testing from local network).
 
@@ -94,7 +101,7 @@ $ npm run dev
 
 **Note for Windows users:** webpack dashboard still have issues with Windows, so use `npm start` until those are resolved.
 
-![Running in the iTerm2](http://i.imgur.com/IxamMBh.png)
+![Running in the iTerm2](http://i.imgur.com/3oKTWrv.png)
 
 **OS X Terminal.app users:** Make sure that **View → Allow Mouse Reporting** is enabled, otherwise scrolling through logs and modules won't work. If your version of Terminal.app doesn't have this feature, you may want to check out an alternative such as [iTerm2](https://www.iterm2.com/).
 

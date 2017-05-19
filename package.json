@@ -6,12 +6,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --colors",
-    "dev": "webpack-dashboard -t 'React-Redux Boilerplate' -- webpack-dev-server --colors --no-info",
+    "start": "webpack-dev-server",
+    "dev": "webpack-dashboard -t 'Marvin' -- webpack-dev-server",
     "build": "rm -rf ./build && NODE_ENV=\"production\" webpack",
     "lint-break-on-errors": "eslint ./source/js ./webpack.config.js -f table --ext .js --ext .jsx",
     "lint": "eslint ./source/js ./webpack.config.js -f table --ext .js --ext .jsx || true",
-    "preview": "rm -rf ./build && NODE_ENV=\"production\" webpack-dashboard -t 'Preview Mode - React-Redux Boilerplate' -- webpack-dev-server",
+    "preview": "rm -rf ./build && NODE_ENV=\"production\" webpack-dashboard -t 'Preview Mode - Marvin' -- webpack-dev-server",
     "hook-add": "prepush install",
     "hook-remove": "prepush remove"
   },
@@ -49,7 +49,7 @@
     "svgo-loader": "^1.2.1",
     "url-loader": "^0.5.7",
     "webpack": "^2.2.1",
-    "webpack-dashboard": "^0.3.0",
+    "webpack-dashboard": "^0.4.0",
     "webpack-dev-server": "^2.2.1"
   },
   "dependencies": {
