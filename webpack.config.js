@@ -64,7 +64,7 @@ const rules = [
     ],
   },
   {
-    test: /icons\/.*\.svg$/,
+    test: /\.svg$/,
     use: [
       {
         loader: 'svg-sprite-loader',

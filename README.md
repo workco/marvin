@@ -64,10 +64,10 @@ By complete I mean it has examples for:
 
 Other nice to have features
 
-- [ ] Generating icon font from SVGs
-- [ ] Modernizr
-- [ ] Google analytics
-- [ ] Error reporting (not sure if this should be the part of the boilerplate)
+- [x] Generating ~~icon font from SVG~~ SVG sprite
+- [ ] Feature detection (Modernizr) (?)
+- [ ] Google analytics (?)
+- [ ] Error reporting (?)
 
 ## Setup
 
@@ -161,11 +161,38 @@ To remove it, run this task:
 npm run hook-remove
 ```
 
+## Components
+
+### SVG icons - `Icon`
+
+Add SVG icons to `source/assets/icons` folder, and they will automatically be added to SVG sprite.
+
+**Usage:**
+
+```
+import Icon from 'components/Global/Icon';
+
+<Icon glyph='triangle' />
+```
+
+**Available props**
+
+```
+glyph       // required, name of the SVG icon
+className   // optional, additional CSS class, default ones are `Icon Icon--iconName`
+width       // optional, default 24
+height      // optional, default 24
+style       // optional, CSS style object
+```
 
 
 -----
 
 ## Changelog
+
+#### 0.1.6
+
+* Added SVG icon loader (SVG sprite) [#18](https://github.com/workco/react-redux-webpack2-boilerplate/pull/18)
 
 #### 0.1.5
 

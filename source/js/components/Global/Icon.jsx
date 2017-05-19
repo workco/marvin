@@ -26,10 +26,12 @@ export default class Icon extends Component {
       style,
     } = this.props;
 
+    const combinedClassName = className ? `Icon Icon--${ glyph } ${ className }` : `Icon Icon--${ glyph }`;
+
     return (
       <svg
         style={ style }
-        className={ className }
+        className={ combinedClassName }
         width={ parseInt(width, 10) }
         height={ parseInt(height, 10) }
       >
@@ -48,7 +50,6 @@ Icon.propTypes = {
 };
 
 Icon.defaultProps = {
-  className: 'icon',
   height: 24,
   width: 24,
 };
