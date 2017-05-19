@@ -174,6 +174,7 @@ module.exports = {
     inline: !isProduction,
     hot: !isProduction,
     host: '0.0.0.0',
+    open: !isProduction,
     stats: {
       assets: true,
       children: false,
