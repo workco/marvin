@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { testAction, testAsync } from 'actions/app';
 import Icon from 'components/Global/Icon';
 import bookImg from '../../../assets/img/book2.jpg';
-import svgImg from '../../../assets/img/svgExample.svg';
 
 @connect(state => ({
   asyncData: state.app.get('asyncData'),
@@ -51,19 +50,26 @@ export default class Dashboard extends Component {
 
     return (
       <div className='Dashboard'>
-        <h2>Examples</h2>
+        <h1>Marvin</h1>
+        <p>
+          Boilerplate for kicking off React/Redux applications.
+        </p>
+
         <hr />
-        <div>
-          <h3>Synchronous action</h3>
-          <p>{ counter }</p>
+
+        <h2>Examples</h2>
+
+        <h3>Synchronous action</h3>
+        <div className='Example'>
+          <p>Counter: { counter }</p>
           <button onClick={ this.handleTestButtonClick }>
-            Increase counter
+            Increase
           </button>
         </div>
-        <hr />
-        <div>
-          <h3>Async action example</h3>
-          <p>{ asyncData }</p>
+
+        <h3>Async action example</h3>
+        <div className='Example'>
+          { asyncData && <p>{ asyncData }</p> }
           { asyncLoading && <p>Loading...</p> }
           { asyncError && <p>Error: { asyncError }</p> }
           <button
@@ -73,21 +79,22 @@ export default class Dashboard extends Component {
             Get async data
           </button>
         </div>
-        <hr />
-        <div>
-          <h3>Background image</h3>
+
+        <h3>Background image</h3>
+        <div className='Example'>
           <div className='BackgroundImgExample' />
+        </div>
 
-          <h3>Image imported to the component</h3>
+        <h3>Image imported to the component</h3>
+        <div className='Example'>
           <img src={ bookImg } alt='' className='ImgExample' />
+        </div>
 
-          <h3>Import icon set</h3>
-          <Icon glyph='square' style={ { marginRight: '10px' } } />
-          <Icon glyph='circle' style={ { marginRight: '10px' } } />
+        <h3>SVG sprite icon set</h3>
+        <div className='Example'>
+          <Icon glyph='square' />
+          <Icon glyph='circle' />
           <Icon glyph='triangle' />
-
-          <h3>Import regular svg</h3>
-          <img src={ svgImg } alt='' className='SvgExample' width='200' />
         </div>
       </div>
     );
