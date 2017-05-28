@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { testAction, testAsync } from 'actions/app';
+import { testAction, testAsync, testAsyncSagaAction } from 'actions/app';
 import Icon from 'components/Global/Icon';
 import bookImg from '../../../assets/img/book2.jpg';
 
@@ -38,6 +38,12 @@ export default class Dashboard extends Component {
     const { dispatch } = this.props;
 
     dispatch(testAction());
+  }
+
+  handleSagaButtonClick() {
+        const { dispatch } = this.props;
+
+        dispatch(testAsyncSagaAction());
   }
 
   render() {
@@ -78,6 +84,13 @@ export default class Dashboard extends Component {
           >
             Get async data
           </button>
+            <button
+                style={{marginLeft:'10px'}}
+                disabled={ asyncLoading }
+                onClick={ ::this.handleSagaButtonClick }
+            >
+                Get async data with saga
+            </button>
         </div>
 
         <h3>Background image</h3>

@@ -1,10 +1,12 @@
 import api from 'api';
 
 export const TEST_ACTION = 'TEST_ACTION';
+export const TEST_ASYNC_SAGA_ACTION = 'TEST_ASYNC_SAGA_ACTION';
 
 export const TEST_ASYNC_ACTION_START = 'TEST_ASYNC_ACTION_START';
 export const TEST_ASYNC_ACTION_ERROR = 'TEST_ASYNC_ACTION_ERROR';
 export const TEST_ASYNC_ACTION_SUCCESS = 'TEST_ASYNC_ACTION_SUCCESS';
+
 
 // Test action
 
@@ -14,22 +16,30 @@ export function testAction() {
   };
 }
 
+// Test saga action
+
+export function testAsyncSagaAction() {
+    return {
+        type: TEST_ASYNC_SAGA_ACTION,
+    };
+}
+
 // Async action example
 
-function testAsyncStart() {
+export function testAsyncStart() {
   return {
     type: TEST_ASYNC_ACTION_START,
   };
 }
 
-function testAsyncSuccess(data) {
+export function testAsyncSuccess(data) {
   return {
     type: TEST_ASYNC_ACTION_SUCCESS,
     data,
   };
 }
 
-function testAsyncError(error) {
+export function testAsyncError(error) {
   return {
     type: TEST_ASYNC_ACTION_ERROR,
     error,

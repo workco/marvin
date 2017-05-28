@@ -8,6 +8,9 @@ import logger from 'dev/logger';
 
 import rootReducer from 'reducers';
 import Routes from 'routes';
+import sagas from './sagas/main';
+import createSagaMiddleware from 'redux-saga';
+
 
 // Load SCSS
 import '../scss/app.scss';
@@ -16,10 +19,11 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 // Creating store
 let store = null;
+const sagaMiddleware = createSagaMiddleware();
 
 if (isProduction) {
   // In production adding only thunk middleware
-  const middleware = applyMiddleware(thunk);
+  const middleware = applyMiddleware(thunk, sagaMiddleware);
 
   store = createStore(
     rootReducer,
@@ -28,7 +32,7 @@ if (isProduction) {
 } else {
   // In development mode beside thunk
   // logger and DevTools are added
-  const middleware = applyMiddleware(thunk, logger);
+  const middleware = applyMiddleware(thunk, logger, sagaMiddleware);
   let enhancer;
 
   // Enable DevTools if browser extension is installed
@@ -47,6 +51,8 @@ if (isProduction) {
     enhancer
   );
 }
+
+sagaMiddleware.run(sagas);
 
 
 // Render it to DOM
