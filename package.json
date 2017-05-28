@@ -63,6 +63,7 @@
     "react-redux": "^4.4.0",
     "react-router": "^3.0.0",
     "redux": "^3.3.1",
+    "redux-saga": "^0.15.3",
     "redux-thunk": "^2.0.1"
   },
   "description": "Starter boilerplate for React and Redux, using Webpack 2",
