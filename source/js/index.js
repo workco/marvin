@@ -7,7 +7,8 @@ import 'babel-polyfill';
 import logger from 'dev/logger';
 
 import rootReducer from 'reducers';
-import Routes from 'routes';
+
+import App from 'views/App';
 
 // Load SCSS
 import '../scss/app.scss';
@@ -41,7 +42,6 @@ if (isProduction) {
     enhancer = compose(middleware);
   }
 
-
   store = createStore(
     rootReducer,
     enhancer
@@ -52,7 +52,7 @@ if (isProduction) {
 // Render it to DOM
 ReactDOM.render(
   <Provider store={ store }>
-    <Routes />
+    <App />
   </Provider>,
   document.getElementById('root')
 );

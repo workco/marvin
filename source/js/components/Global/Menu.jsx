@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { IndexLink, Link } from 'react-router';
-import { routeCodes } from '../../routes';
+import { NavLink } from 'react-router-dom';
+import { routeCodes } from '../../views/App';
 import workAndCoLogoImg from '../../../assets/img/workco-logo.svg';
 
 export default class Menu extends Component {
-
   render() {
     return (
       <div className='Menu'>
@@ -15,27 +14,28 @@ export default class Menu extends Component {
           />
         </div>
         <div className='Menu-links'>
-          <IndexLink
+          <NavLink
             activeClassName='Menu-link--active'
             className='Menu-link'
+            exact
             to={ routeCodes.DASHBOARD }
           >
             Home
-          </IndexLink>
-          <Link
+          </NavLink>
+          <NavLink
             activeClassName='Menu-link--active'
             className='Menu-link'
             to={ routeCodes.ABOUT }
           >
             About
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
             activeClassName='Menu-link--active'
             className='Menu-link'
             to='404'
           >
             404
-          </Link>
+          </NavLink>
         </div>
       </div>
     );
