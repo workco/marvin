@@ -197,6 +197,12 @@ style       // optional, CSS style object
 
 ## Changelog
 
+#### 0.1.7
+
+* Migrated to React Router 4.x (thanks @shams-ali)
+* Added .editorconfig file
+* Fixed couple of typos
+
 #### 0.1.6
 
 * Added SVG icon loader (SVG sprite) [#18](https://github.com/workco/react-redux-webpack2-boilerplate/pull/18)
