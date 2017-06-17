@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { testAction, testAsync } from 'actions/app';
-import Icon from 'components/Global/Icon';
-import bookImg from '../../../assets/img/book2.jpg';
+// import Icon from 'components/Global/Icon';
+// import bookImg from '../../../assets/img/book2.jpg';
 
 @connect(state => ({
   asyncData: state.app.get('asyncData'),
@@ -13,10 +13,10 @@ import bookImg from '../../../assets/img/book2.jpg';
 }))
 export default class Dashboard extends Component {
   static propTypes = {
-    asyncData: PropTypes.string,
-    asyncError: PropTypes.object,
-    asyncLoading: PropTypes.bool,
-    counter: PropTypes.number,
+    // asyncData: PropTypes.string,
+    // asyncError: PropTypes.object,
+    // asyncLoading: PropTypes.bool,
+    // counter: PropTypes.number,
     // from react-redux connect
     dispatch: PropTypes.func,
   }
@@ -41,23 +41,32 @@ export default class Dashboard extends Component {
   }
 
   render() {
-    const {
-      asyncData,
-      asyncError,
-      asyncLoading,
-      counter,
-    } = this.props;
+    // const {
+    //   asyncData,
+    //   asyncError,
+    //   asyncLoading,
+    //   counter,
+    // } = this.props;
 
     return (
       <div className='Dashboard'>
-        <h1>Marvin</h1>
+        <h1>Shams Ali</h1>
         <p>
-          Boilerplate for kicking off React/Redux applications.
+          Software Engineer, Instructor at Operation Spark
+        </p>
+        <p>
+          University of California, Riverside
+        </p>
+        <p>
+          Los Angeles, CA | San Francisco, CA | New Orleans, LA
         </p>
 
         <hr />
+        <p>
+          As an enthusiast for bleeding edge technology, I develop full-stack solutions for the next generation.
+        </p>
 
-        <h2>Examples</h2>
+        {/* <h2>Examples</h2>
 
         <h3>Synchronous action</h3>
         <div className='Example'>
@@ -95,7 +104,7 @@ export default class Dashboard extends Component {
           <Icon glyph='square' />
           <Icon glyph='circle' />
           <Icon glyph='triangle' />
-        </div>
+        </div> */}
       </div>
     );
   }
