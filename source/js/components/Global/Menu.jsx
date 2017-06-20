@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import { routeCodes } from '../../views/App';
+import { routeCodes } from 'config/routes';
 import workAndCoLogoImg from '../../../assets/img/workco-logo.svg';
 
 export default class Menu extends Component {

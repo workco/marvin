@@ -22,7 +22,7 @@ const plugins = [
   new SpritePlugin(),
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
-    filename: 'vendor-[hash].js',
+    filename: 'vendor.js',
     minChunks(module) {
       const context = module.context;
       return context && context.indexOf('node_modules') >= 0;
@@ -33,7 +33,7 @@ const plugins = [
       NODE_ENV: JSON.stringify(nodeEnv),
     },
   }),
-  new webpack.NamedModulesPlugin(),
+  // new webpack.NamedModulesPlugin(),
   new HtmlWebpackPlugin({
     template: path.join(sourcePath, 'index.html'),
     path: buildPath,
@@ -57,20 +57,13 @@ const plugins = [
 // Common rules
 const rules = [
   {
-    test: /\.(js|jsx)$/,
-    exclude: /node_modules/,
-    use: [
-      'babel-loader',
-    ],
-  },
-  {
     test: /\.svg$/,
     use: [
       {
         loader: 'svg-sprite-loader',
         options: {
           extract: true,
-          spriteFilename: 'icons-sprite.svg',
+          spriteFilename: 'assets/icons-sprite.svg',
         },
       },
       'svgo-loader',
@@ -104,11 +97,18 @@ if (isProduction) {
         comments: false,
       },
     }),
-    new ExtractTextPlugin('style-[hash].css')
+    new ExtractTextPlugin('style.css')
   );
 
   // Production rules
   rules.push(
+    {
+      test: /\.(js|jsx)$/,
+      exclude: /node_modules/,
+      use: [
+        'babel-loader',
+      ],
+    },
     {
       test: /\.scss$/,
       loader: ExtractTextPlugin.extract({
@@ -127,6 +127,14 @@ if (isProduction) {
   // Development rules
   rules.push(
     {
+      test: /\.(js|jsx)$/,
+      exclude: /node_modules/,
+      use: [
+        'react-hot-loader/webpack',
+        'babel-loader',
+      ],
+    },
+    {
       test: /\.scss$/,
       exclude: /node_modules/,
       use: [
@@ -144,16 +152,18 @@ if (isProduction) {
   );
 }
 
+const entry = isProduction ?
+  ['./client.js'] :
+  ['react-hot-loader/patch', './client.js'];
+
 module.exports = {
   devtool: isProduction ? false : 'source-map',
   context: jsSourcePath,
-  entry: {
-    js: './index.js',
-  },
+  entry,
   output: {
     path: buildPath,
     publicPath: '/',
-    filename: 'app-[hash].js',
+    filename: 'client.js',
   },
   module: {
     rules,
