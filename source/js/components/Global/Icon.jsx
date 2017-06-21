@@ -1,20 +1,29 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-// Load all icons
-const svgIcons = require.context('../../../assets/icons', false, /.*\.svg$/);
+const DEFAULT_SIZE = 24;
+const icons = {};
 
-function requireAll(requireContext) {
-  return requireContext.keys().map(requireContext);
-}
+const req = require.context('../../../assets/icons', true, /.*\.svg$/);
 
-const icons = requireAll(svgIcons).reduce(
-  (state, icon) => ({
-    ...state,
-    [icon.default.split('#')[1].replace('-usage', '')]: icon.default,
-  }),
-  {}
-);
+req.keys().forEach((key) => {
+  const icon = req(key).default;
+  const dimensions = icon.viewBox && icon.viewBox.split(' ');
+
+  let width = DEFAULT_SIZE;
+  let height = DEFAULT_SIZE;
+
+  if (dimensions && dimensions.length === 4) {
+    width = dimensions[2];
+    height = dimensions[3];
+  }
+
+  icons[icon.id] = {
+    href: `#${ icon.id }`,
+    width,
+    height,
+  };
+});
 
 export default class Icon extends Component {
   render() {
@@ -26,16 +35,26 @@ export default class Icon extends Component {
       style,
     } = this.props;
 
+    const icon = icons[glyph];
+
+    if (!icon) {
+      console.error(`Icon.jsx - There is no "${ glyph }" glyph`); // eslint-disable-line no-console
+
+      return null;
+    }
+
     const combinedClassName = className ? `Icon Icon--${ glyph } ${ className }` : `Icon Icon--${ glyph }`;
+    const w = parseInt(width, 10) || icon.width;
+    const h = parseInt(height, 10) || icon.height;
 
     return (
       <svg
         style={ style }
         className={ combinedClassName }
-        width={ parseInt(width, 10) }
-        height={ parseInt(height, 10) }
+        width={ w }
+        height={ h }
       >
-        <use xlinkHref={ icons[glyph] } />
+        <use xlinkHref={ icon.href } />
       </svg>
     );
   }
@@ -47,9 +66,4 @@ Icon.propTypes = {
   glyph: PropTypes.string.isRequired,
   className: PropTypes.string,
   style: PropTypes.object,
-};
-
-Icon.defaultProps = {
-  height: 24,
-  width: 24,
 };

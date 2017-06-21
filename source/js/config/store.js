@@ -25,7 +25,7 @@ export default () => {
     let enhancer;
 
     // Enable DevTools if browser extension is installed
-    if (window.__REDUX_DEVTOOLS_EXTENSION__) { // eslint-disable-line
+    if (!process.env.SERVER_RENDER && window.__REDUX_DEVTOOLS_EXTENSION__) { // eslint-disable-line
       enhancer = compose(
         middleware,
         window.__REDUX_DEVTOOLS_EXTENSION__() // eslint-disable-line
