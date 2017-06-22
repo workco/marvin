@@ -37,7 +37,7 @@ app.use((req, res) => {
     res.redirect(301, context.url);
   } else {
     // We're good, send the response
-    res.status(context.status || 200).send(serverHtml);// getMarkup(store, renderProps));
+    res.status(context.status || 200).send(serverHtml);
   }
 
   // TODO how to handle 50x errors?

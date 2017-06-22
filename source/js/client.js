@@ -13,7 +13,6 @@ import 'isomorphic-fetch';
 // Load SCSS
 import '../scss/app.scss';
 
-
 es6Promise.polyfill();
 
 const store = configureStore();

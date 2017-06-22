@@ -10,6 +10,7 @@ const devServer = {
   hot: !IS_PRODUCTION,
   host: '0.0.0.0',
   disableHostCheck: true, // To enable local network testing
+  overlay: true,
   stats: {
     assets: true,
     children: false,

@@ -6,14 +6,14 @@ import Menu from 'components/Global/Menu';
 
 import svgSprite from 'svg-sprite-loader/runtime/sprite.build';
 
+const sprite = svgSprite.stringify();
+
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object,
   }
 
   render() {
-    const sprite = svgSprite.stringify();
-
     return (
       <div className='App'>
         <Menu />

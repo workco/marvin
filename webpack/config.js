@@ -102,10 +102,6 @@ const rules = [
     use: [
       {
         loader: 'svg-sprite-loader',
-        // options: {
-        //   extract: true,
-        //   spriteFilename: outputFiles.svgSprite,
-        // },
       },
       {
         loader: 'svgo-loader',
