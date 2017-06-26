@@ -113,7 +113,7 @@ if (isProduction) {
       test: /\.scss$/,
       loader: ExtractTextPlugin.extract({
         fallback: 'style-loader',
-        use: 'css-loader!postcss-loader!sass-loader',
+        use: 'css-loader!sass-loader',
       }),
     }
   );
@@ -137,7 +137,6 @@ if (isProduction) {
         // https://github.com/webpack/css-loader/issues/232#issuecomment-240449998
         // 'css-loader?sourceMap',
         'css-loader',
-        'postcss-loader',
         'sass-loader?sourceMap',
       ],
     }
