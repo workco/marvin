@@ -5,7 +5,6 @@ const DashboardPlugin = require('webpack-dashboard/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const SpritePlugin = require('svg-sprite-loader/plugin');
-const autoprefixer = require('autoprefixer');
 
 const nodeEnv = process.env.NODE_ENV || 'development';
 const isProduction = nodeEnv === 'production';
@@ -38,19 +37,6 @@ const plugins = [
     template: path.join(sourcePath, 'index.html'),
     path: buildPath,
     filename: 'index.html',
-  }),
-  new webpack.LoaderOptionsPlugin({
-    options: {
-      postcss: [
-        autoprefixer({
-          browsers: [
-            'last 3 version',
-            'ie >= 10',
-          ],
-        }),
-      ],
-      context: sourcePath,
-    },
   }),
 ];
 
@@ -110,10 +96,16 @@ if (isProduction) {
   // Production rules
   rules.push(
     {
-      test: /\.scss$/,
+      test: /\.css$/,
       loader: ExtractTextPlugin.extract({
         fallback: 'style-loader',
-        use: 'css-loader!postcss-loader!sass-loader',
+        use: [
+          {
+            loader: 'css-loader',
+            options: { importLoaders: 1 },
+          },
+          'postcss-loader',
+        ],
       }),
     }
   );
@@ -127,18 +119,24 @@ if (isProduction) {
   // Development rules
   rules.push(
     {
-      test: /\.scss$/,
+      test: /\.css$/,
       exclude: /node_modules/,
       use: [
-        'style-loader',
-        // Using source maps breaks urls in the CSS loader
-        // https://github.com/webpack/css-loader/issues/232
-        // This comment solves it, but breaks testing from a local network
-        // https://github.com/webpack/css-loader/issues/232#issuecomment-240449998
-        // 'css-loader?sourceMap',
-        'css-loader',
-        'postcss-loader',
-        'sass-loader?sourceMap',
+        {
+          loader: 'style-loader',
+          options: { sourceMap: true },
+        },
+        {
+          loader: 'css-loader',
+          options: {
+            importLoaders: 1,
+            sourceMap: true,
+          },
+        },
+        {
+          loader: 'postcss-loader',
+          options: { sourceMap: true },
+        },
       ],
     }
   );

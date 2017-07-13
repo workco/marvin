@@ -11,7 +11,7 @@ import rootReducer from 'reducers';
 import App from 'views/App';
 
 // Load SCSS
-import '../scss/app.scss';
+import '../css/index.css';
 
 const isProduction = process.env.NODE_ENV === 'production';
 
