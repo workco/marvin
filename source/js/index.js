@@ -10,8 +10,12 @@ import rootReducer from 'reducers';
 
 import App from 'views/App';
 
-// Load SCSS
-import '../css/index.css';
+/**
+ * This loads the SCSS/CSS file.
+ * For more info, refer to the README, or webpack.config.js
+ */
+import '../scss/app.scss';
+// import '../css/index.css';
 
 const isProduction = process.env.NODE_ENV === 'production';
 

@@ -6,6 +6,19 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const SpritePlugin = require('svg-sprite-loader/plugin');
 
+/**
+ * Marvin supports the use of either:
+ * - SCSS pre-processor, with PostCSS autoprefixer plugin
+ * - CSS with PostCSS import and css-next plugins
+ *
+ * SCSS is enabled by default. To switch to using CSS,
+ * switch the commented-out `cssConfig` variable below.
+ * Also, change the css entry point in the application
+ * at source/js/index.js
+ */
+const cssConfig = require('./webpack/scss');
+// const cssConfig = require('./webpack/postcss');
+
 const nodeEnv = process.env.NODE_ENV || 'development';
 const isProduction = nodeEnv === 'production';
 
@@ -39,6 +52,10 @@ const plugins = [
     filename: 'index.html',
   }),
 ];
+
+if (cssConfig.plugin) {
+  plugins.push(cssConfig.plugin);
+}
 
 // Common rules
 const rules = [
@@ -94,21 +111,7 @@ if (isProduction) {
   );
 
   // Production rules
-  rules.push(
-    {
-      test: /\.css$/,
-      loader: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: [
-          {
-            loader: 'css-loader',
-            options: { importLoaders: 1 },
-          },
-          'postcss-loader',
-        ],
-      }),
-    }
-  );
+  rules.push(cssConfig.rules.prod);
 } else {
   // Development plugins
   plugins.push(
@@ -117,29 +120,7 @@ if (isProduction) {
   );
 
   // Development rules
-  rules.push(
-    {
-      test: /\.css$/,
-      exclude: /node_modules/,
-      use: [
-        {
-          loader: 'style-loader',
-          options: { sourceMap: true },
-        },
-        {
-          loader: 'css-loader',
-          options: {
-            importLoaders: 1,
-            sourceMap: true,
-          },
-        },
-        {
-          loader: 'postcss-loader',
-          options: { sourceMap: true },
-        },
-      ],
-    }
-  );
+  rules.push(cssConfig.rules.dev);
 }
 
 module.exports = {
