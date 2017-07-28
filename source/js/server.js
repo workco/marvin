@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import express from 'express';
 import { Provider } from 'react-redux';
+import transit from 'transit-immutable-js';
 
 import 'babel-polyfill';
 
@@ -21,7 +22,10 @@ app.use('/client', express.static('build/client'));
 app.use((req, res) => {
   // Creates empty store for each request
   const store = configureStore();
+  // Dehydrates the state
+  const dehydratedState = JSON.stringify(transit.toJSON(store.getState()));
 
+  // Context is passed to the StaticRouter and it will attach data to it directly
   const context = {};
 
   const appHtml = ReactDOMServer.renderToString(
@@ -30,10 +34,10 @@ app.use((req, res) => {
     </Provider>
   );
 
-  const serverHtml = getServerHtml(appHtml);
+  const serverHtml = getServerHtml(appHtml, dehydratedState);
 
+  // Context has url, which means `<Redirect>` was rendered somewhere
   if (context.url) {
-    // Somewhere a `<Redirect>` was rendered
     res.redirect(301, context.url);
   } else {
     // We're good, send the response

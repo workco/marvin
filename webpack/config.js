@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const SpritePlugin = require('svg-sprite-loader/plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
@@ -9,7 +8,7 @@ const paths = {
   source: path.join(__dirname, '../source'),
   javascript: path.join(__dirname, '../source/js'),
   images: path.join(__dirname, '../source/assets/img'),
-  icons: path.join(__dirname, '../source/assets/icons'),
+  svg: path.join(__dirname, '../source/assets/svg'),
   build: path.join(__dirname, '../build'),
 };
 
@@ -28,27 +27,11 @@ const IS_PRODUCTION = NODE_ENV === 'production';
 const plugins = [
   // Extracts CSS to a file
   new ExtractTextPlugin(outputFiles.css),
-  // Builds SVG sprite
-  new SpritePlugin(),
   // Injects env variables to our app
   new webpack.DefinePlugin({
     'process.env': {
       NODE_ENV: JSON.stringify(NODE_ENV),
       SERVER_RENDER: JSON.stringify(SERVER_RENDER) === 'true',
-    },
-  }),
-  // Autoprefixer
-  new webpack.LoaderOptionsPlugin({
-    options: {
-      postcss: [
-        autoprefixer({
-          browsers: [
-            'last 3 version',
-            'ie >= 10',
-          ],
-        }),
-      ],
-      context: paths.source,
     },
   }),
 ];
@@ -61,7 +44,7 @@ if (IS_PRODUCTION) {
         comparisons: true,
         conditionals: true,
         dead_code: true,
-        // drop_console: true,
+        drop_console: !SERVER_RENDER, // Keep server logs
         drop_debugger: true,
         evaluate: true,
         if_return: true,
@@ -101,58 +84,94 @@ const rules = [
     test: /\.svg$/,
     use: [
       {
-        loader: 'svg-sprite-loader',
+        loader: 'babel-loader',
       },
       {
-        loader: 'svgo-loader',
+        loader: 'react-svg-loader',
         options: {
-          plugins: [
-            { removeTitle: true },
-            { removeUselessStrokeAndFill: true },
-            {
-              removeAttrs: {
-                attrs: ['fill', 'stroke.*'],
+          svgo: {
+            plugins: [
+              {
+                removeTitle: true,
               },
-            },
-          ],
+            ],
+            floatPrecision: 2,
+          },
         },
       },
     ],
-    include: paths.icons,
+    include: paths.svg,
   },
   {
     test: /\.(png|gif|jpg|svg)$/,
     include: paths.images,
-    use: 'url-loader?limit=20480&name=client/assets/[name]-[hash].[ext]',
+    use: [
+      {
+        loader: 'file-loader',
+        options: {
+          name: 'client/assets/[name]-[hash].[ext]',
+        },
+      },
+    ],
   },
 ];
 
 // Almost the same rule is used in both development and production
-// only diffence is source map param
+// only diffence is source map param and ExtractTextPlugin
 // so we are using this method to avoid redundant code
-const getSassRule = (params = '') => {
+const getSassRule = () => {
+  const autoprefixerOptions = {
+    browsers: [
+      'last 3 version',
+      'ie >= 10',
+    ],
+  };
+
+  const sassLoaders = [
+    {
+      loader: 'css-loader',
+      options: {
+        sourceMap: IS_DEVELOPMENT,
+        minimize: IS_PRODUCTION,
+      },
+    },
+    {
+      loader: 'postcss-loader',
+      options: {
+        sourceMap: IS_DEVELOPMENT,
+        plugins: () => [
+          autoprefixer(autoprefixerOptions),
+        ],
+      },
+    },
+    {
+      loader: 'sass-loader',
+      options: { sourceMap: IS_DEVELOPMENT },
+    },
+  ];
+
+  if (IS_PRODUCTION || SERVER_RENDER) {
+    return {
+      test: /\.scss$/,
+      loader: ExtractTextPlugin.extract({
+        use: sassLoaders,
+      }),
+    };
+  }
+
   return {
     test: /\.scss$/,
-    loader: ExtractTextPlugin.extract({
-      fallback: 'style-loader',
-      use: `css-loader${ params }!postcss-loader!sass-loader${ params }`,
-    }),
+    use: [
+      {
+        loader: 'style-loader',
+      },
+    ].concat(sassLoaders),
   };
 };
 
-if (IS_PRODUCTION) {
-  // Shared production rules
-  rules.push(
-    // SCSS files are compiled and extracted to separate file
-    getSassRule()
-  );
-} else {
-  // Shared development rules
-  rules.push(
-    // SCSS files are compiled and extracted to separate file with source maps
-    getSassRule('?sourceMap')
-  );
-}
+// Add SASS rule to common rules
+rules.push(getSassRule());
+
 
 // ----------
 // RESOLVE

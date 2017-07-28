@@ -8,6 +8,7 @@ const IS_PRODUCTION = require('./webpack/config').IS_PRODUCTION;
 
 // Webpack config
 const config = {
+  target: 'node',
   watch: !IS_PRODUCTION,
   devtool: IS_PRODUCTION ? false : 'source-map',
   context: paths.javascript,
@@ -27,7 +28,9 @@ const config = {
   // Fix for node modules
   externals: fs.readdirSync('node_modules').reduce((accumulator, module) => {
     const newAccumulator = accumulator;
-    newAccumulator[module] = `commonjs ${ module }`;
+    if (module !== '.bin') {
+      newAccumulator[module] = `commonjs ${ module }`;
+    }
 
     return newAccumulator;
   }, {}),

@@ -35,6 +35,13 @@ plugins.push(
     template: path.join(paths.source, 'index.html'),
     path: paths.build,
     filename: 'index.html',
+    minify: {
+      collapseWhitespace: true,
+      minifyCSS: true,
+      minifyJS: true,
+      removeComments: true,
+      useShortDoctype: true,
+    },
   })
 );
 
