@@ -5,20 +5,20 @@ import PropTypes from 'prop-types';
 const svgIcons = require.context('../../../assets/icons', false, /.*\.svg$/);
 
 function requireAll(requireContext) {
-  return requireContext.keys().map(requireContext);
+    return requireContext.keys().map(requireContext);
 }
 
 const icons = requireAll(svgIcons).reduce(
   (state, icon) => ({
     ...state,
-    [icon.default.split('#')[1].replace('-usage', '')]: icon.default,
+    [icon.default.url.split('#')[1].replace('-usage', '')]: icon.default,
   }),
   {}
 );
 
 export default class Icon extends Component {
   render() {
-    const {
+      const {
       className,
       width,
       height,
