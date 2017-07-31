@@ -6,14 +6,17 @@
   ],
   "presets": [
     ["es2015", { "modules": false }],
-    "react",
-    "stage-0"
+    "stage-0",
+    "react"
   ],
   "env": {
     "development": {
-      "presets": [
-        "react-hmre"
+      "plugins": [
+        "react-hot-loader/babel"
       ]
+    },
+    "production": {
+      "presets": ["react-optimize"]
     }
   }
 }

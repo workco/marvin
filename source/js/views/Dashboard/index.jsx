@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { testAction, testAsync } from 'actions/app';
-import Icon from 'components/Global/Icon';
+import CircleSvg from '../../../assets/svg/circle.svg';
+import SquareSvg from '../../../assets/svg/square.svg';
+import TriangleSvg from '../../../assets/svg/triangle.svg';
 import bookImg from '../../../assets/img/book2.jpg';
 
 @connect(state => ({
@@ -69,7 +71,12 @@ export default class Dashboard extends Component {
 
         <h3>Async action example</h3>
         <div className='Example'>
-          { asyncData && <p>{ asyncData }</p> }
+          { asyncData &&
+            <p>
+              Date: { asyncData.date }<br />
+              Time: { asyncData.time }<br />
+              Miliseconds since epoch: { asyncData.milliseconds_since_epoch }
+            </p> }
           { asyncLoading && <p>Loading...</p> }
           { asyncError && <p>Error: { asyncError }</p> }
           <button
@@ -90,11 +97,11 @@ export default class Dashboard extends Component {
           <img src={ bookImg } alt='' className='ImgExample' />
         </div>
 
-        <h3>SVG sprite icon set</h3>
+        <h3>SVGs imported as react components</h3>
         <div className='Example'>
-          <Icon glyph='square' />
-          <Icon glyph='circle' />
-          <Icon glyph='triangle' />
+          <CircleSvg style={ { marginRight: 10 } } />
+          <SquareSvg style={ { marginRight: 10 } } />
+          <TriangleSvg />
         </div>
       </div>
     );

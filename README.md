@@ -14,13 +14,17 @@ Name comes from a fictional character [Marvin](https://en.wikipedia.org/wiki/Mar
 * [What is this?](#user-content-what-is-this)
 * [Features](#user-content-features)
 * [Setup](#user-content-setup)
+* [npm tasks](#user-content-npm-tasks)
 * [Running in dev mode](#user-content-running-in-dev-mode)
-* [Build (production)](#user-content-build-production)
-* [Running in preview production mode](#user-content-running-in-preview-production-mode)
+* [Running it with webpack dashboard](#user-content-running-it-with-webpack-dashboard)
+* [Build client (production)](#user-content-build-client-production)
+* [Running client in preview production mode](#user-content-running-client-in-preview-production-mode)
+* [Universal dev mode](#user-content-universal-dev-mode)
+* [Universal build (production)](#user-content-universal-build-production)
+* [Removing server rendering related stuff](#user-content-removing-server-rendering-related-stuff)
 * [Linting](#user-content-linting)
 * [Git hooks](#user-content-git-hooks)
 * [Changelog](#user-content-changelog)
-
 
 ## What is this?
 
@@ -49,9 +53,10 @@ By complete we mean it has examples for:
 - [x] Redux
 - [x] Redux Thunk
 - [x] Redux DevTools (you need to have [browser extension](https://github.com/zalmoxisus/redux-devtools-extension) installed)
-- [x] Immutable reducer data
-- [x] Webpack 2 (development and production config)
+- [x] Universal rendering
+- [x] Webpack 3 (development and production config)
 - [x] Hot Module Replacement
+- [x] Immutable reducer data
 - [x] Babel - static props, decorators
 - [x] SASS with autoprefixing
 - [x] Webpack dashboard
@@ -60,29 +65,37 @@ By complete we mean it has examples for:
 - [x] Preview production build
 - [x] File imports relative to the app root
 - [x] Git hooks - lint before push
+- [x] Tree shaking build
+- [x] Import SVGs as React components
 
 ## TODO
 
-- [x] Tree shaking build
 - [ ] Switch to [redux-saga](https://github.com/redux-saga/redux-saga)
-- [ ] Universal rendering
 - [ ] Server async data
 - [ ] Internationalization
 
-Other nice to have features
-
-- [x] Generating ~~icon font from SVG~~ SVG sprite
-- [ ] Feature detection (Modernizr) (?)
-- [ ] Google analytics (?)
-- [ ] Error reporting (?)
 
 ## Setup
 
-Tested with node 6.x and 7.x
+Tested with node 7.x and 8.x
 
 ```
 $ npm install
 ```
+
+## npm tasks
+
+* `start` - starts client app only in development mode, using webpack dev server
+* `client:dev` - same as `start` plus fancy webpack dashboard
+* `client:watch` - not to be used on it's own, starts webpack with client config in watch mode
+* `client:build` - builds client application
+* `client:preview` - runs client application in *production* mode, using webpack dev server (use for local testing of the client production build)
+* `server:watch` - not to be used on it's own, starts webpack with server config in watch mode
+* `server:restart` - not to be used on it's own, server build run using `nodemon`
+* `server:build` - not to be used on it's own, builds server application
+* `server:dev` - starts server app only in development mode (use for testing server responses)
+* `universal:dev` - runs both server and client in watch mode, automatically restarts server on changes
+* `universal:build` - builds both server and client
 
 ## Running in dev mode
 
@@ -105,7 +118,7 @@ $ npm run dev
 
 **OS X Terminal.app users:** Make sure that **View → Allow Mouse Reporting** is enabled, otherwise scrolling through logs and modules won't work. If your version of Terminal.app doesn't have this feature, you may want to check out an alternative such as [iTerm2](https://www.iterm2.com/).
 
-## Build (production)
+## Build client (production)
 
 Build will be placed in the `build` folder.
 
@@ -133,7 +146,7 @@ const publicPath = '/your-app/';
 
 Don't forget the trailing slash (`/`). In development visit `http://localhost:3000/your-app/`.
 
-## Running in preview production mode
+## Running client in preview production mode
 
 This command will start webpack dev server, but with `NODE_ENV` set to `production`.
 Everything will be minified and served.
@@ -142,6 +155,51 @@ Hot reload will not work, so you need to refresh the page manually after changin
 ```
 npm run preview
 ```
+
+## Universal dev mode
+
+```
+npm run universal:dev
+```
+
+Visit `http://localhost:8080/` from your browser of choice.
+Server is visible from the local network as well.
+
+## Universal build (production)
+
+```
+npm run universal:build
+```
+
+copy `package.json` and `build` folder to your production server
+
+install only production dependencies and run server
+
+```
+npm install --production
+
+node ./build/server.js
+```
+
+## Removing server rendering related stuff
+
+If you are not using server rendering remove following packages from `package.json`
+
+* `express`
+* `transit-immutable-js`
+* `transit-js`
+* `nodemon`
+* `concurrently`
+
+Also open `source/js/config/store.js` and remove lines marked with the following comment
+
+```
+// Remove if you are not using server rendering
+```
+
+Client app is going to work without this but, it will include few unused packages.
+Therefore it is better to remove them.
+
 
 ## Linting
 
@@ -168,34 +226,15 @@ To remove it, run this task:
 npm run hook-remove
 ```
 
-## Components
-
-### SVG icons - `Icon`
-
-Add SVG icons to `source/assets/icons` folder, and they will automatically be added to SVG sprite.
-
-**Usage:**
-
-```
-import Icon from 'components/Global/Icon';
-
-<Icon glyph='triangle' />
-```
-
-**Available props**
-
-```
-glyph       // required, name of the SVG icon
-className   // optional, additional CSS class, default ones are `Icon Icon--iconName`
-width       // optional, default 24
-height      // optional, default 24
-style       // optional, CSS style object
-```
-
-
 -----
 
 ## Changelog
+
+#### 0.2.0
+
+* Webpack updated to v3 and rewritten webpack config
+* Optional universal rendering
+* A lot of code changes
 
 #### 0.1.7
 

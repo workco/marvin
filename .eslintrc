@@ -23,13 +23,6 @@ rules:
   arrow-body-style: 0
   arrow-parens: 0
   class-methods-use-this: 0
-  func-names: 0
-  indent: 2
-  new-cap: 0
-  no-plusplus: 0
-  no-return-assign: 0
-  quote-props: 0
-  template-curly-spacing: [2, "always"]
   comma-dangle: ["error", {
     "arrays": "always-multiline",
     "objects": "always-multiline",
@@ -37,13 +30,23 @@ rules:
     "exports": "always-multiline",
     "functions": "never"
   }]
+  func-names: 0
+  indent: 2
   jsx-quotes: [2, "prefer-single"]
-  react/forbid-prop-types: 0
-  react/jsx-curly-spacing: [2, "always"]
-  react/jsx-filename-extension: 0
-  react/jsx-boolean-value: 0
-  react/prefer-stateless-function: 0
+  new-cap: 0
+  no-plusplus: 0
+  no-return-assign: 0
+  quote-props: 0
+  template-curly-spacing: [2, "always"]
+  # import rules
   import/extensions: 0
   import/no-extraneous-dependencies: 0
   import/no-unresolved: 0
   import/prefer-default-export: 0
+  # react rules
+  react/forbid-prop-types: 0
+  react/jsx-boolean-value: 0
+  react/jsx-curly-spacing: [2, "always"]
+  react/jsx-filename-extension: 0
+  react/prefer-stateless-function: 0
+  react/require-default-props: 0
