@@ -24,6 +24,7 @@ Name comes from a fictional character [Marvin](https://en.wikipedia.org/wiki/Mar
 * [Removing server rendering related stuff](#user-content-removing-server-rendering-related-stuff)
 * [Linting](#user-content-linting)
 * [Git hooks](#user-content-git-hooks)
+* [Misc](#user-content-misc)
 * [Changelog](#user-content-changelog)
 
 ## What is this?
@@ -109,7 +110,7 @@ Server is visible from the local network as well.
 ### Running it with [webpack dashboard](https://github.com/FormidableLabs/webpack-dashboard)
 
 ```
-$ npm run dev
+$ npm run client:dev
 ```
 
 **Note for Windows users:** webpack dashboard still have issues with Windows, so use `npm start` until those are resolved.
@@ -225,6 +226,35 @@ To remove it, run this task:
 ```
 npm run hook-remove
 ```
+
+## Misc
+
+### Importing images in SCSS
+
+Please note that paths to images in SCSS files are relative to `source/scss/base/main.scss` as it imports all of the other `.scss` files.
+
+```
+.BackgroundImgExample {
+  background-image: url(../assets/img/book1.jpg);
+}
+```
+
+Check the example in [source/scss/base/_app.scss](https://github.com/workco/marvin/blob/master/source/scss/base/_app.scss#L164)
+
+### Importing SVGs as components
+
+Just import your `.svg` files from the `source/assets/svg/` folder, and you are good to go.
+
+```
+import CircleSvg from '../../../assets/svg/circle.svg';
+
+// then in your render
+
+<CircleSvg />
+
+```
+
+Check the example in [source/js/views/Dashboard/index.jsx](https://github.com/workco/marvin/blob/master/source/js/views/Dashboard/index.jsx#L5-L7)
 
 -----
 
