@@ -124,7 +124,7 @@ $ npm run client:dev
 Build will be placed in the `build` folder.
 
 ```
-$ npm run build
+$ npm run client:build
 ```
 
 If your app is not running on the server root you should change `publicPath` at two places.
@@ -154,7 +154,7 @@ Everything will be minified and served.
 Hot reload will not work, so you need to refresh the page manually after changing the code.
 
 ```
-npm run preview
+npm run client:preview
 ```
 
 ## Universal dev mode
