@@ -15,8 +15,8 @@ import bookImg from '../../../assets/img/book2.jpg';
 }))
 export default class Dashboard extends Component {
   static propTypes = {
-    asyncData: PropTypes.string,
-    asyncError: PropTypes.object,
+    asyncData: PropTypes.object,
+    asyncError: PropTypes.string,
     asyncLoading: PropTypes.bool,
     counter: PropTypes.number,
     // from react-redux connect
