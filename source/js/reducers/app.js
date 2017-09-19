@@ -34,7 +34,7 @@ const actionsMap = {
   [TEST_ASYNC_ACTION_ERROR]: (state, action) => {
     return state.merge(Map({
       asyncLoading: false,
-      asyncError: action.data,
+      asyncError: action.error.message,
     }));
   },
   [TEST_ASYNC_ACTION_SUCCESS]: (state, action) => {
