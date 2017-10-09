@@ -28,11 +28,10 @@ app.use((req, res) => {
   // Context is passed to the StaticRouter and it will attach data to it directly
   const context = {};
 
-  const appHtml = ReactDOMServer.renderToString(
+  const appHtml = ReactDOMServer.renderToString( // eslint-disable-line function-paren-newline
     <Provider store={ store }>
       <Server location={ req.url } context={ context } />
-    </Provider>
-  );
+    </Provider>);
 
   const serverHtml = getServerHtml(appHtml, dehydratedState);
 

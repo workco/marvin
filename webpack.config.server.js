@@ -1,10 +1,10 @@
 const fs = require('fs');
 
-const paths = require('./webpack/config').paths;
-const rules = require('./webpack/config').rules;
-const plugins = require('./webpack/config').plugins;
-const resolve = require('./webpack/config').resolve;
-const IS_PRODUCTION = require('./webpack/config').IS_PRODUCTION;
+const { paths } = require('./webpack/config');
+const { rules } = require('./webpack/config');
+const { plugins } = require('./webpack/config');
+const { resolve } = require('./webpack/config');
+const { IS_PRODUCTION } = require('./webpack/config');
 
 // Webpack config
 const config = {
