@@ -12,7 +12,7 @@ const paths = {
   build: path.join(__dirname, '../build'),
 };
 
-const outputFiles = require('./output-files').outputFiles;
+const { outputFiles } = require('./output-files');
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const SERVER_RENDER = process.env.SERVER_RENDER === 'true';
@@ -38,33 +38,30 @@ const plugins = [
 
 if (IS_PRODUCTION) {
   // Shared production plugins
-  plugins.push(
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        comparisons: true,
-        conditionals: true,
-        dead_code: true,
-        drop_console: !SERVER_RENDER, // Keep server logs
-        drop_debugger: true,
-        evaluate: true,
-        if_return: true,
-        join_vars: true,
-        screw_ie8: true,
-        sequences: true,
-        unused: true,
-        warnings: false,
-      },
-      output: {
-        comments: false,
-      },
-    })
-  );
+  const prodPlugins = new webpack.optimize.UglifyJsPlugin({
+    compress: {
+      comparisons: true,
+      conditionals: true,
+      dead_code: true,
+      drop_console: !SERVER_RENDER, // Keep server logs
+      drop_debugger: true,
+      evaluate: true,
+      if_return: true,
+      join_vars: true,
+      screw_ie8: true,
+      sequences: true,
+      unused: true,
+      warnings: false,
+    },
+    output: {
+      comments: false,
+    },
+  });
+  plugins.push(prodPlugins);
 } else {
   // Shared development plugins
-  plugins.push(
-    // Enables pretty names instead of index
-    new webpack.NamedModulesPlugin()
-  );
+  // Enables pretty names instead of index
+  plugins.push(new webpack.NamedModulesPlugin());
 }
 
 // ----------

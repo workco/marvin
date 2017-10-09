@@ -4,4 +4,5 @@ build
 .module-cache
 *.log*
 _nogit
+.idea
 todo.md
