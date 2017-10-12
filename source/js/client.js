@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 import 'babel-polyfill';
@@ -18,14 +19,16 @@ es6Promise.polyfill();
 const store = configureStore();
 
 const render = Component => {
-  ReactDOM.render(
-    <AppContainer>
-      <Provider store={ store }>
-        <Component />
-      </Provider>
-    </AppContainer>,
-    document.getElementById('root')
-  );
+    ReactDOM.render(
+        <AppContainer>
+            <Provider store={ store }>
+                <BrowserRouter>
+                    <Component />
+                </BrowserRouter>
+            </Provider>
+        </AppContainer>,
+        document.getElementById('root')
+    );
 };
 
 // Render app
