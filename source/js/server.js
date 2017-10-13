@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import express from 'express';
+import { StaticRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import transit from 'transit-immutable-js';
 
@@ -8,7 +9,7 @@ import 'babel-polyfill';
 
 import configureStore from 'config/store';
 import getServerHtml from 'config/server-html';
-import Server from 'views/Server';
+import App from 'views/App';
 
 // Load SCSS
 import '../scss/app.scss';
@@ -30,7 +31,9 @@ app.use((req, res) => {
 
   const appHtml = ReactDOMServer.renderToString(
     <Provider store={ store }>
-      <Server location={ req.url } context={ context } />
+        <StaticRouter location={ req.url } context={ context }>
+            <App />
+        </StaticRouter>
     </Provider>
   );
 
