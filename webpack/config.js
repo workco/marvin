@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const path = require('path');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const autoprefixer = require('autoprefixer');
 
 const paths = {
   source: path.join(__dirname, '../source'),
@@ -13,6 +12,19 @@ const paths = {
 };
 
 const outputFiles = require('./output-files').outputFiles;
+
+/**
+ * Marvin supports the use of either:
+ * - SCSS pre-processor, with PostCSS autoprefixer plugin
+ * - CSS with PostCSS import and css-next plugins
+ *
+ * SCSS is enabled by default. To switch to using CSS,
+ * switch the commented-out `cssConfig` variable below.
+ * Also, change the css entry point in the application
+ * at source/js/client.js and source/js/server.js
+*/
+const cssConfig = require('./scss');
+// const cssConfig = require('./postcss');
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const SERVER_RENDER = process.env.SERVER_RENDER === 'true';
@@ -116,62 +128,8 @@ const rules = [
   },
 ];
 
-// Almost the same rule is used in both development and production
-// only diffence is source map param and ExtractTextPlugin
-// so we are using this method to avoid redundant code
-const getSassRule = () => {
-  const autoprefixerOptions = {
-    browsers: [
-      'last 3 version',
-      'ie >= 10',
-    ],
-  };
-
-  const sassLoaders = [
-    {
-      loader: 'css-loader',
-      options: {
-        sourceMap: IS_DEVELOPMENT,
-        minimize: IS_PRODUCTION,
-      },
-    },
-    {
-      loader: 'postcss-loader',
-      options: {
-        sourceMap: IS_DEVELOPMENT,
-        plugins: () => [
-          autoprefixer(autoprefixerOptions),
-        ],
-      },
-    },
-    {
-      loader: 'sass-loader',
-      options: { sourceMap: IS_DEVELOPMENT },
-    },
-  ];
-
-  if (IS_PRODUCTION || SERVER_RENDER) {
-    return {
-      test: /\.scss$/,
-      loader: ExtractTextPlugin.extract({
-        use: sassLoaders,
-      }),
-    };
-  }
-
-  return {
-    test: /\.scss$/,
-    use: [
-      {
-        loader: 'style-loader',
-      },
-    ].concat(sassLoaders),
-  };
-};
-
 // Add SASS rule to common rules
-rules.push(getSassRule());
-
+rules.push((IS_PRODUCTION || SERVER_RENDER) ? cssConfig.rules.prod : cssConfig.rules.dev);
 
 // ----------
 // RESOLVE

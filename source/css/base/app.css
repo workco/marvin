@@ -1,43 +1,35 @@
-$font-family-serif: Garamond, "Times New Roman", serif;
-$font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
-
-$grey-border: #eee;
-$grey-text: #aaa;
-$black: #000;
-$white: #fff;
-
 html {
   font-size: 10px;
 
-  @include lg {
+  @media (--lg) {
     font-size: 12px;
   }
 
-  @include xl {
+  @media (--xl) {
     font-size: 14px;
   }
 }
 
 body {
-  color: $black;
-  font-family: $font-family-sans-serif;
+  color: var(--black);
+  font-family: var(--font-family-sans-serif);
 }
 
 .App {
   font-size: 1.8rem;
   padding: 2rem;
 
-  @include md {
+  @media (--md) {
     padding: 4rem;
   }
 }
 
 a {
-  color: $grey-text;
+  color: var(--grey-text);
 }
 
 a:hover {
-  color: $black;
+  color: var(--black);
 }
 
 h1,
@@ -61,7 +53,7 @@ h3 {
 button {
   background: transparent;
   border-radius: 1.6rem;
-  border: 0.1rem solid $black;
+  border: 0.1rem solid var(--black);
   cursor: pointer;
   font-size: 1.5rem;
   padding: 0.7rem 2rem;
@@ -72,19 +64,19 @@ button:disabled {
 }
 
 button:hover {
-  background: $white;
+  background: var(--white);
 }
 
 .Menu {
   align-items: center;
-  border-bottom: 1px solid $grey-border;
+  border-bottom: 1px solid var(--grey-border);
   display: flex;
   justify-content: space-between;
   padding-bottom: 2rem;
   margin: 0 auto 2rem;
   max-width: 60rem;
 
-  @include lg {
+  @media (--lg) {
     margin-left: 20rem;
     margin: 0 0 2rem 20rem;
     padding-bottom: 0;
@@ -99,49 +91,44 @@ button:hover {
   margin-right: 2rem;
   width: 6rem;
 
-  @include lg {
+  @media (--lg) {
     position: fixed;
     height: 100vh;
     top: 0;
     left: 0;
-    border-right: 1px solid $grey-border;
+    border-right: 1px solid var(--grey-border);
     width: 20rem;
     padding: 4rem;
   }
 }
 
-.Menu-links {
-  @include md {
-  }
-}
-
 .Menu-link {
   display: inline-block;
-  font-family: $font-family-serif;
+  font-family: var(--font-family-serif);;
   font-style: italic;
   margin-left: 1.5rem;
   line-height: 3rem;
   text-decoration: none;
 
-  @include md {
+  @media (--md) {
     margin-left: 3rem;
   }
 
-  @include lg {
+  @media (--lg) {
     margin: 0 3rem 0 0;
     line-height: 7.5rem;
   }
 }
 
 .Menu-link--active {
-  color: $black;
+  color: var(--black);
 }
 
 .Page {
   max-width: 60rem;
   margin: 0 auto;
 
-  @include lg {
+  @media (--lg) {
     margin: 0 0 0 20rem;
   }
 }
@@ -171,6 +158,6 @@ button:hover {
 
 hr {
   border: 0;
-  border-top: 1px solid $grey-border;
+  border-top: 1px solid var(--grey-border);
   margin: 2rem 0;
 }
