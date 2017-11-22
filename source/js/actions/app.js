@@ -16,20 +16,20 @@ export function testAction() {
 
 // Async action example
 
-function testAsyncStart() {
+export function testAsyncStart() {
   return {
     type: TEST_ASYNC_ACTION_START,
   };
 }
 
-function testAsyncSuccess(data) {
+export function testAsyncSuccess(data) {
   return {
     type: TEST_ASYNC_ACTION_SUCCESS,
     data,
   };
 }
 
-function testAsyncError(error) {
+export function testAsyncError(error) {
   return {
     type: TEST_ASYNC_ACTION_ERROR,
     error,

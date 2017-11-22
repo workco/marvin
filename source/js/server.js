@@ -11,6 +11,9 @@ import configureStore from 'config/store';
 import getServerHtml from 'config/server-html';
 import App from 'views/App';
 
+import api from 'api';
+import { testAsyncSuccess, testAsyncError } from 'actions/app';
+
 // Load SCSS
 import '../scss/app.scss';
 
@@ -18,11 +21,7 @@ const app = express();
 const hostname = 'localhost';
 const port = 8080;
 
-app.use('/client', express.static('build/client'));
-
-app.use((req, res) => {
-  // Creates empty store for each request
-  const store = configureStore();
+const respond = (req, res, store) => {
   // Dehydrates the state
   const dehydratedState = JSON.stringify(transit.toJSON(store.getState()));
 
@@ -39,7 +38,6 @@ app.use((req, res) => {
 
   const serverHtml = getServerHtml(appHtml, dehydratedState);
 
-  // Context has url, which means `<Redirect>` was rendered somewhere
   if (context.url) {
     res.redirect(301, context.url);
   } else {
@@ -48,6 +46,39 @@ app.use((req, res) => {
   }
 
   // TODO how to handle 50x errors?
+};
+
+const fetchData = (req, res, store) => {
+  const routeMapper = {
+    '/': () => {
+      api.testAsync()
+        .then(data => {
+          store.dispatch(testAsyncSuccess(data));
+          respond(req, res, store);
+        })
+        .catch(error => {
+          store.dispatch(testAsyncError(error));
+          respond(req, res, store);
+        });
+    },
+  };
+
+  return routeMapper[req.url] || null;
+};
+
+app.use('/client', express.static('build/client'));
+
+app.use((req, res) => {
+  // Creates empty store for each request
+  const store = configureStore();
+
+  const action = fetchData(req, res, store);
+
+  if (action) {
+    action();
+  } else {
+    respond(req, res, store);
+  }
 });
 
 // Start listening
