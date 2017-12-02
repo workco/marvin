@@ -11,8 +11,12 @@ import App from 'views/App';
 import es6Promise from 'es6-promise';
 import 'isomorphic-fetch';
 
-// Load SCSS
+/**
+ * This loads the SCSS/CSS file.
+ * For more info, refer to the README, or webpack.config.js
+*/
 import '../scss/app.scss';
+// import '../css/index.css';
 
 es6Promise.polyfill();
 

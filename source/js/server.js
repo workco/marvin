@@ -11,8 +11,12 @@ import configureStore from 'config/store';
 import getServerHtml from 'config/server-html';
 import App from 'views/App';
 
-// Load SCSS
+/**
+ * This loads the SCSS/CSS file.
+ * For more info, refer to the README, or webpack.config.js
+*/
 import '../scss/app.scss';
+// import '../css/index.css';
 
 const app = express();
 const hostname = 'localhost';
