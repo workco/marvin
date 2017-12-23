@@ -15,8 +15,7 @@ Name comes from a fictional character [Marvin](https://en.wikipedia.org/wiki/Mar
 * [Features](#user-content-features)
 * [Setup](#user-content-setup)
 * [npm tasks](#user-content-npm-tasks)
-* [Running in dev mode](#user-content-running-in-dev-mode)
-* [Running it with webpack dashboard](#user-content-running-it-with-webpack-dashboard)
+* [Running client in dev mode](#user-content-running-client-in-dev-mode)
 * [Build client (production)](#user-content-build-client-production)
 * [Running client in preview production mode](#user-content-running-client-in-preview-production-mode)
 * [Universal dev mode](#user-content-universal-dev-mode)
@@ -50,19 +49,18 @@ By complete we mean it has examples for:
 ## Features
 
 - [x] React
-- [x] React router
+- [x] React router v4
 - [x] Redux
-- [x] Redux Thunk
+- [x] ~~Redux Thunk~~
 - [x] Redux DevTools (you need to have [browser extension](https://github.com/zalmoxisus/redux-devtools-extension) installed)
 - [x] Universal rendering
 - [x] Webpack 3 (development and production config)
 - [x] Hot Module Replacement
 - [x] Immutable reducer data
 - [x] Babel - static props, decorators
-- [x] SASS with autoprefixing
-- [x] Webpack dashboard
+- [x] ~~SASS with autoprefixing~~
+- [x] ~~Webpack dashboard~~
 - [x] Linting
-- [x] Included `es6-promise` and `isomorphic-fetch`
 - [x] Preview production build
 - [x] File imports relative to the app root
 - [x] Git hooks - lint before push
@@ -71,8 +69,8 @@ By complete we mean it has examples for:
 
 ## TODO
 
-- [ ] Switch to [redux-saga](https://github.com/redux-saga/redux-saga)
-- [ ] Server async data
+- [x] Switch to [redux-saga](https://github.com/redux-saga/redux-saga)
+- [x] Server async data
 - [ ] Internationalization
 
 
@@ -87,37 +85,29 @@ $ npm install
 ## npm tasks
 
 * `start` - starts client app only in development mode, using webpack dev server
-* `client:dev` - same as `start` plus fancy webpack dashboard
-* `client:watch` - not to be used on it's own, starts webpack with client config in watch mode
+* `client:dev` - same as `start`
 * `client:build` - builds client application
 * `client:preview` - runs client application in *production* mode, using webpack dev server (use for local testing of the client production build)
-* `server:watch` - not to be used on it's own, starts webpack with server config in watch mode
-* `server:restart` - not to be used on it's own, server build run using `nodemon`
-* `server:build` - not to be used on it's own, builds server application
 * `server:dev` - starts server app only in development mode (use for testing server responses)
 * `universal:dev` - runs both server and client in watch mode, automatically restarts server on changes
 * `universal:build` - builds both server and client
 
-## Running in dev mode
+There are other tasks as well which shouldn't be used on their own.
+
+## Running client in dev mode
 
 ```
 $ npm start
 ```
 
-Visit `http://localhost:3000/` from your browser of choice.
-Server is visible from the local network as well.
-
-### Running it with [webpack dashboard](https://github.com/FormidableLabs/webpack-dashboard)
+or
 
 ```
 $ npm run client:dev
 ```
 
-**Note for Windows users:** webpack dashboard still have issues with Windows, so use `npm start` until those are resolved.
-
-![Running in the iTerm2](http://i.imgur.com/3oKTWrv.png)
-
-**OS X Terminal.app users:** Make sure that **View → Allow Mouse Reporting** is enabled, otherwise scrolling through logs and modules won't work. If your version of Terminal.app doesn't have this feature, you may want to check out an alternative such as [iTerm2](https://www.iterm2.com/).
+Visit `http://localhost:8080/` from your browser of choice.
+Server is visible from the local network as well.
 
 ## Build client (production)
 
@@ -129,7 +119,7 @@ $ npm run client:build
 
 If your app is not running on the server root you should change `publicPath` at two places.
 
-In `webpack.config.js` (ATM line 147):
+In `webpack.config.js` (ATM line 75):
 
 ```
 output: {
@@ -139,7 +129,7 @@ output: {
 },
 ```
 
-and in `source/js/routes` (ATM line 9):
+and in `source/js/config/routes` (ATM line 8):
 
 ```
 const publicPath = '/your-app/';

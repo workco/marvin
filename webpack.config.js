@@ -1,17 +1,19 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const paths = require('./webpack/config').paths;
-const outputFiles = require('./webpack/config').outputFiles;
-const rules = require('./webpack/config').rules;
-const plugins = require('./webpack/config').plugins;
-const resolve = require('./webpack/config').resolve;
-const IS_PRODUCTION = require('./webpack/config').IS_PRODUCTION;
-const IS_DEVELOPMENT = require('./webpack/config').IS_DEVELOPMENT;
+const {
+  paths,
+  outputFiles,
+  rules,
+  plugins,
+  resolve,
+  stats,
+  IS_PRODUCTION,
+  IS_DEVELOPMENT,
+} = require('./webpack/config');
 
 const devServer = require('./webpack/dev-server').devServer;
 
-const DashboardPlugin = require('webpack-dashboard/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
@@ -52,15 +54,15 @@ if (IS_DEVELOPMENT) {
     new webpack.HotModuleReplacementPlugin(),
     // Don't emmit build when there was an error while compiling
     // No assets are emitted that include errors
-    new webpack.NoEmitOnErrorsPlugin(),
-    // Webpack dashboard plugin
-    new DashboardPlugin()
+    new webpack.NoEmitOnErrorsPlugin()
   );
 
   // In development we add 'react-hot-loader' for .js/.jsx files
   // Check rules in config.js
   rules[0].use.unshift('react-hot-loader/webpack');
   entry.unshift('react-hot-loader/patch');
+  // For IE babel-polyfill has to be loaded before react-hot-loader
+  entry.unshift('babel-polyfill');
 }
 
 // Webpack config
@@ -77,7 +79,8 @@ module.exports = {
   module: {
     rules,
   },
-  resolve,
   plugins,
+  resolve,
+  stats,
   devServer,
 };

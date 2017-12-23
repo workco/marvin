@@ -2,20 +2,22 @@ const webpack = require('webpack');
 const path = require('path');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const autoprefixer = require('autoprefixer');
 
 const paths = {
   source: path.join(__dirname, '../source'),
   javascript: path.join(__dirname, '../source/js'),
   images: path.join(__dirname, '../source/assets/img'),
   svg: path.join(__dirname, '../source/assets/svg'),
+  assets: path.join(__dirname, '../source/assets/'),
   build: path.join(__dirname, '../build'),
+  css: path.join(__dirname, '../source/css/'),
 };
 
 const outputFiles = require('./output-files').outputFiles;
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const SERVER_RENDER = process.env.SERVER_RENDER === 'true';
+const HYDRATE = process.env.HYDRATE === 'true';
 const IS_DEVELOPMENT = NODE_ENV === 'development';
 const IS_PRODUCTION = NODE_ENV === 'production';
 
@@ -32,6 +34,7 @@ const plugins = [
     'process.env': {
       NODE_ENV: JSON.stringify(NODE_ENV),
       SERVER_RENDER: JSON.stringify(SERVER_RENDER) === 'true',
+      HYDRATE: JSON.stringify(HYDRATE) === 'true',
     },
   }),
 ];
@@ -95,7 +98,7 @@ const rules = [
                 removeTitle: true,
               },
             ],
-            floatPrecision: 2,
+            floatPrecision: 3,
           },
         },
       },
@@ -116,62 +119,52 @@ const rules = [
   },
 ];
 
-// Almost the same rule is used in both development and production
-// only diffence is source map param and ExtractTextPlugin
-// so we are using this method to avoid redundant code
-const getSassRule = () => {
-  const autoprefixerOptions = {
-    browsers: [
-      'last 3 version',
-      'ie >= 10',
-    ],
-  };
 
-  const sassLoaders = [
+// For both production and server ExtractTextPlugin is used
+if (IS_PRODUCTION || SERVER_RENDER) {
+  rules.push(
     {
-      loader: 'css-loader',
-      options: {
-        sourceMap: IS_DEVELOPMENT,
-        minimize: IS_PRODUCTION,
-      },
-    },
-    {
-      loader: 'postcss-loader',
-      options: {
-        sourceMap: IS_DEVELOPMENT,
-        plugins: () => [
-          autoprefixer(autoprefixerOptions),
-        ],
-      },
-    },
-    {
-      loader: 'sass-loader',
-      options: { sourceMap: IS_DEVELOPMENT },
-    },
-  ];
-
-  if (IS_PRODUCTION || SERVER_RENDER) {
-    return {
-      test: /\.scss$/,
+      test: /\.css$/,
       loader: ExtractTextPlugin.extract({
-        use: sassLoaders,
+        fallback: 'style-loader',
+        use: [
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              minimize: true,
+            },
+          },
+          'postcss-loader',
+        ],
       }),
-    };
-  }
-
-  return {
-    test: /\.scss$/,
-    use: [
-      {
-        loader: 'style-loader',
-      },
-    ].concat(sassLoaders),
-  };
-};
-
-// Add SASS rule to common rules
-rules.push(getSassRule());
-
+    }
+  );
+} else {
+  rules.push(
+    {
+      test: /\.css$/,
+      exclude: /node_modules/,
+      use: [
+        {
+          loader: 'style-loader',
+          options: { sourceMap: true },
+        },
+        {
+          loader: 'css-loader',
+          options: {
+            importLoaders: 1,
+            sourceMap: true,
+          },
+        },
+        {
+          loader: 'postcss-loader',
+          options: { sourceMap: true },
+        },
+      ],
+    }
+  );
+}
 
 // ----------
 // RESOLVE
@@ -182,17 +175,37 @@ const resolve = {
   modules: [
     path.join(__dirname, '../node_modules'),
     paths.javascript,
+    paths.assets,
+    paths.css,
   ],
 };
 
+// ----------
+// CLI STATS
+// ----------
+
+const stats = {
+  colors: true,
+  assets: true,
+  children: false,
+  chunks: false,
+  hash: false,
+  modules: false,
+  publicPath: false,
+  timings: true,
+  version: false,
+  warnings: true,
+};
+
 module.exports = {
+  IS_DEVELOPMENT,
+  IS_PRODUCTION,
+  NODE_ENV,
+  SERVER_RENDER,
   outputFiles,
   paths,
   plugins,
   resolve,
   rules,
-  IS_DEVELOPMENT,
-  IS_PRODUCTION,
-  NODE_ENV,
-  SERVER_RENDER,
+  stats,
 };

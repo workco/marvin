@@ -5,8 +5,17 @@
     "syntax-decorators"
   ],
   "presets": [
-    ["es2015", { "modules": false }],
-    "stage-0",
+    ["env", {
+      "modules": false,
+      "useBuiltIns": "entry",
+      "targets": {
+        "browsers": [
+          "last 2 versions",
+          "> 1%"
+        ]
+      }
+    }],
+    "stage-2",
     "react"
   ],
   "env": {

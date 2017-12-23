@@ -7,15 +7,6 @@ parser:
 settings:
   ecmascript: 6
 
-ecmaFeatures:
-  jsx: true
-  modules: true
-  destructuring: true
-  classes: true
-  forOf: true
-  blockBindings: true
-  arrowFunctions: true
-
 env:
   browser: true
 
@@ -31,11 +22,14 @@ rules:
     "functions": "never"
   }]
   func-names: 0
+  function-paren-newline: 0
   indent: 2
   jsx-quotes: [2, "prefer-single"]
+  max-len: ["error", { "code": 120 }]
   new-cap: 0
   no-plusplus: 0
   no-return-assign: 0
+  prefer-destructuring: 0
   quote-props: 0
   template-curly-spacing: [2, "always"]
   # import rules

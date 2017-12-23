@@ -1,25 +1,24 @@
+import 'babel-polyfill';
+import 'isomorphic-fetch';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
-import 'babel-polyfill';
 
 import configureStore from 'config/store';
 import App from 'views/App';
 
-import es6Promise from 'es6-promise';
-import 'isomorphic-fetch';
+// Load CSS
+import 'index.css';
 
-// Load SCSS
-import '../scss/app.scss';
-
-es6Promise.polyfill();
-
-const store = configureStore();
+const store = configureStore().store;
 
 const render = Component => {
-  ReactDOM.render(
+  const renderMethod = process.env.HYDRATE ? ReactDOM.hydrate : ReactDOM.render;
+
+  renderMethod(
     <AppContainer>
       <Provider store={ store }>
         <BrowserRouter>
@@ -35,8 +34,8 @@ const render = Component => {
 render(App);
 
 if (module.hot) {
-  module.hot.accept('./views/App/', () => {
-    const NewClient = require('./views/App/index').default; // eslint-disable-line global-require
+  module.hot.accept('./views/App.jsx', () => {
+    const NewClient = require('./views/App.jsx').default; // eslint-disable-line global-require
 
     render(NewClient);
   });

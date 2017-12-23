@@ -1,33 +1,35 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import { routeCodes } from 'config/routes';
-import workAndCoLogoImg from '../../../assets/img/workco-logo.svg';
+import { routeCodes } from 'constants/routes';
+import workAndCoLogoImg from 'img/workco-logo.svg';
 
 export default class Menu extends Component {
   render() {
     return (
       <div className='Menu'>
         <div className='Menu-logo'>
-          <img
-            src={ workAndCoLogoImg }
-            alt='Work & Co logo'
-          />
+          <a href='https://work.co' target='_blank' rel='noreferrer noopener' aria-label='Work & Co website'>
+            <img
+              src={ workAndCoLogoImg }
+              alt='Work & Co logo'
+            />
+          </a>
         </div>
         <div className='Menu-links'>
           <NavLink
             activeClassName='Menu-link--active'
             className='Menu-link'
             exact
-            to={ routeCodes.DASHBOARD }
+            to={ routeCodes.HOME }
           >
             Home
           </NavLink>
           <NavLink
             activeClassName='Menu-link--active'
             className='Menu-link'
-            to={ routeCodes.ABOUT }
+            to={ routeCodes.PEOPLE }
           >
-            About
+            API data example
           </NavLink>
           <NavLink
             activeClassName='Menu-link--active'
