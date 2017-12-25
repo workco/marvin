@@ -29,6 +29,8 @@ if (INIT_STATE) {
 }
 
 // Creating store
+// Remove "serverSagas" and "sagaOptions" params
+// if you are not using server rendering
 export default (serverSagas = null, sagaOptions = {}) => {
   let store = null;
   let middleware = null;
@@ -61,6 +63,7 @@ export default (serverSagas = null, sagaOptions = {}) => {
   );
 
   // Server render
+  // Remove if you are not using server rendering
   if (serverSagas) {
     // Start server sagas
     const tasks = serverSagas.map(saga => sagaMiddleware.run(saga, sagaOptions));

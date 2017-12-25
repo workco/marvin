@@ -5,12 +5,13 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const paths = {
   source: path.join(__dirname, '../source'),
-  javascript: path.join(__dirname, '../source/js'),
-  images: path.join(__dirname, '../source/assets/img'),
-  svg: path.join(__dirname, '../source/assets/svg'),
   assets: path.join(__dirname, '../source/assets/'),
-  build: path.join(__dirname, '../build'),
   css: path.join(__dirname, '../source/css/'),
+  fonts: path.join(__dirname, '../source/assets/fonts/'),
+  images: path.join(__dirname, '../source/assets/img'),
+  javascript: path.join(__dirname, '../source/js'),
+  svg: path.join(__dirname, '../source/assets/svg'),
+  build: path.join(__dirname, '../build'),
 };
 
 const outputFiles = require('./output-files').outputFiles;
@@ -83,6 +84,7 @@ const rules = [
     exclude: /node_modules/,
     use: ['babel-loader'],
   },
+  // SVG are imported as react components
   {
     test: /\.svg$/,
     use: [
@@ -105,6 +107,7 @@ const rules = [
     ],
     include: paths.svg,
   },
+  // Images
   {
     test: /\.(png|gif|jpg|svg)$/,
     include: paths.images,
@@ -116,6 +119,17 @@ const rules = [
         },
       },
     ],
+  },
+  // Fonts
+  {
+    test: /\.(eot|ttf|woff|woff2)$/,
+    include: paths.fonts,
+    loader: 'url-loader',
+    options: {
+      limit: 10240,
+      name: 'fonts/[name].[ext]', // Remove hash so we can reuse in error pages
+      publicPath: './', // Workaround for CSS `url()` resolving issue
+    },
   },
 ];
 
