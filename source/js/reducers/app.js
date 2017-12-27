@@ -6,9 +6,6 @@ import {
 
 const initialState = Map({
   counter: 0,
-  loading: false,
-  error: null,
-  time: null,
 });
 
 const actionsMap = {

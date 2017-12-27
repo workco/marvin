@@ -8,7 +8,7 @@ import TriangleSvg from 'svg/triangle.svg';
 import bookImg from 'img/book2.jpg';
 
 @connect(state => ({
-  time: state.app.get('time'),
+  counter: state.app.get('counter'),
 }))
 export default class Home extends Component {
   static propTypes = {
