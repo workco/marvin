@@ -31,9 +31,9 @@ app.use((req, res) => {
 
   const appHtml = ReactDOMServer.renderToString(
     <Provider store={ store }>
-        <StaticRouter location={ req.url } context={ context }>
-            <App />
-        </StaticRouter>
+      <StaticRouter location={ req.url } context={ context }>
+        <App />
+      </StaticRouter>
     </Provider>
   );
 
