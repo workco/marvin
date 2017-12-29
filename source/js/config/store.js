@@ -23,7 +23,7 @@ let INIT_STATE = null;
 try {
   INIT_STATE = __MARVIN_DEHYDRATED_STATE; // eslint-disable-line no-undef
 } catch (e) {
-  console.log('Mavin: No dehydrated state'); // eslint-disable-line no-console
+  console.log('Marvin: No dehydrated state'); // eslint-disable-line no-console
 }
 
 // Remove if you are not using server rendering
