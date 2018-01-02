@@ -57,10 +57,6 @@ if (IS_DEVELOPMENT) {
     new webpack.NoEmitOnErrorsPlugin()
   );
 
-  // In development we add 'react-hot-loader' for .js/.jsx files
-  // Check rules in config.js
-  rules[0].use.unshift('react-hot-loader/webpack');
-  entry.unshift('react-hot-loader/patch');
   // For IE babel-polyfill has to be loaded before react-hot-loader
   entry.unshift('babel-polyfill');
 }

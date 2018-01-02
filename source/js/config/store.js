@@ -16,16 +16,7 @@ try {
   // If state exists we need to parse it to JS object
   initialState = Serialize(Immutable).parse(__MARVIN_DEHYDRATED_STATE); // eslint-disable-line no-undef
 } catch (e) {
-<<<<<<< HEAD
-  console.log('Marvin: No dehydrated state'); // eslint-disable-line no-console
-}
-
-// Remove if you are not using server rendering
-if (INIT_STATE) {
-  INIT_STATE = transit.fromJSON(INIT_STATE);
-=======
   // ★★ Marvin: No dehydrated state
->>>>>>> Switched to redux-saga.
 }
 
 // Creating store

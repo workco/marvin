@@ -77,8 +77,7 @@ if (IS_PRODUCTION) {
 
 // Shared rules
 const rules = [
-  // Babel loader without react hot loader
-  // react-hot-loader is added in webpack.config.js for development only
+  // Babel loader
   {
     test: /\.(js|jsx)$/,
     exclude: /node_modules/,

@@ -15,28 +15,16 @@ import 'index.css';
 
 const store = configureStore().store;
 
-const render = Component => {
-  const renderMethod = process.env.HYDRATE ? ReactDOM.hydrate : ReactDOM.render;
+// When used with server dehydrated date "ReactDOM.hydrate" should be called
+const renderMethod = process.env.HYDRATE ? ReactDOM.hydrate : ReactDOM.render;
 
-  renderMethod(
-    <AppContainer>
-      <Provider store={ store }>
-        <BrowserRouter>
-          <Component />
-        </BrowserRouter>
-      </Provider>
-    </AppContainer>,
-    document.getElementById('root')
-  );
-};
-
-// Render app
-render(App);
-
-if (module.hot) {
-  module.hot.accept('./views/App.jsx', () => {
-    const NewClient = require('./views/App.jsx').default; // eslint-disable-line global-require
-
-    render(NewClient);
-  });
-}
+renderMethod(
+  <AppContainer>
+    <Provider store={ store }>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  </AppContainer>,
+  document.getElementById('root')
+);
