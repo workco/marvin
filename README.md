@@ -25,7 +25,8 @@ and [postcss](https://github.com/postcss/postcss) from `scss`.
 * [Universal dev mode](#user-content-universal-dev-mode)
 * [Universal build (production)](#user-content-universal-build-production)
 * [Removing server rendering related stuff](#user-content-removing-server-rendering-related-stuff)
-* [Browser support](#user-browser-support)
+* [Browser support](#user-content-browser-support)
+* [Known issues](#user-content-known-issues)
 * [Linting](#user-content-linting)
 * [Misc](#user-content-misc)
 * [Changelog](CHANGELOG.md)
@@ -189,7 +190,7 @@ If anyone is willing to automate this, help will be greatly appreciated.
 
 Modern browsers and IE10+.
 
-### Known issues
+## Known issues
 
 These are known bugs that affect **development mode only**.
 
