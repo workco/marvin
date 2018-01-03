@@ -1,6 +1,6 @@
-const isProduction = process.env.NODE_ENV === 'production';
+const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
-if (isProduction) {
+if (IS_PRODUCTION) {
   module.exports = null;
 } else {
   module.exports = require('./logger-exports').default; // eslint-disable-line global-require

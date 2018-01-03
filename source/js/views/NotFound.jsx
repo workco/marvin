@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 
 // This component is used for Server rendering
 // When you want to return 40x http statuses
-
 const RouteStatus = ({ code, children }) => (
   <Route
     render={
@@ -24,4 +23,14 @@ RouteStatus.propTypes = {
   children: PropTypes.object,
 };
 
-export default RouteStatus;
+export default class NotFound extends Component {
+  render() {
+    return (
+      <RouteStatus code={ 404 }>
+        <div className='NotFound'>
+          <h1>Not Found</h1>
+        </div>
+      </RouteStatus>
+    );
+  }
+}

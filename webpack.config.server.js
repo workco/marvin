@@ -1,10 +1,13 @@
 const fs = require('fs');
 
-const paths = require('./webpack/config').paths;
-const rules = require('./webpack/config').rules;
-const plugins = require('./webpack/config').plugins;
-const resolve = require('./webpack/config').resolve;
-const IS_PRODUCTION = require('./webpack/config').IS_PRODUCTION;
+const {
+  paths,
+  rules,
+  plugins,
+  resolve,
+  IS_PRODUCTION,
+  stats,
+} = require('./webpack/config');
 
 // Webpack config
 const config = {
@@ -25,6 +28,7 @@ const config = {
   },
   resolve,
   plugins,
+  stats,
   // Fix for node modules
   externals: fs.readdirSync('node_modules').reduce((accumulator, module) => {
     const newAccumulator = accumulator;

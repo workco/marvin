@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
-import { outputFiles } from '../../../webpack/output-files';
+import { outputFiles } from '../../../../webpack/output-files';
 
-const ServerHtml = ({ appHtml, dehydratedState }) => (
+const ServerHTML = ({ appHtml, dehydratedState }) => (
   <html lang='en'>
     <head>
       <meta charSet='utf-8' />
-      <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0' />
+      <meta name='viewport' content='width=device-width, initial-scale=1.0, minimum-scale=1.0' />
 
       <title>Marvin &bull; React/Redux Boilerplate</title>
 
@@ -27,13 +27,15 @@ const ServerHtml = ({ appHtml, dehydratedState }) => (
   </html>
 );
 
-ServerHtml.propTypes = {
+ServerHTML.propTypes = {
   appHtml: PropTypes.string,
   dehydratedState: PropTypes.string,
 };
 
-const getServerHtml = (appHtml, dehydratedState = null) => {
-  return `<!doctype html>${ ReactDOMServer.renderToString(<ServerHtml appHtml={ appHtml } dehydratedState={ dehydratedState } />) }`;
+const getServerHTML = (appHtml, dehydratedState = null) => {
+  return `<!doctype html>${ ReactDOMServer.renderToString(
+    <ServerHTML appHtml={ appHtml } dehydratedState={ dehydratedState } />
+  ) }`;
 };
 
-export default getServerHtml;
+export default getServerHTML;

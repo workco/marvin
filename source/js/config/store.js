@@ -1,51 +1,45 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
 import logger from 'dev/logger';
 
-// Remove if you are not using server rendering
-// Also remove following packages from package.json
-// "express"
-// "transit-immutable-js"
-// "transit-js"
-// "nodemon"
-// "concurrently"
-import transit from 'transit-immutable-js';
+import Immutable from 'immutable'; // Remove if you are not using server rendering
+import Serialize from 'remotedev-serialize/immutable'; // Remove if you are not using server rendering
 
 
+import rootSaga from 'sagas';
 import rootReducer from 'reducers';
 
-const isProduction = process.env.NODE_ENV === 'production';
+const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
-// Remove if you are not using server rendering
-let INIT_STATE = null;
+let initialState = {};
 
 // Remove if you are not using server rendering
 try {
-  INIT_STATE = __MARVIN_DEHYDRATED_STATE; // eslint-disable-line no-undef
+  // If state exists we need to parse it to JS object
+  initialState = Serialize(Immutable).parse(__MARVIN_DEHYDRATED_STATE); // eslint-disable-line no-undef
 } catch (e) {
-  console.log('Marvin: No dehydrated state'); // eslint-disable-line no-console
-}
-
-// Remove if you are not using server rendering
-if (INIT_STATE) {
-  INIT_STATE = transit.fromJSON(INIT_STATE);
+  // ★★ Marvin: No dehydrated state
 }
 
 // Creating store
-export default () => {
+// Remove "serverSagas" and "sagaOptions" params
+// if you are not using server rendering
+export default (serverSagas = null, sagaOptions = {}) => {
   let store = null;
   let middleware = null;
 
-  if (isProduction) {
-    // In production adding only thunk middleware
-    middleware = applyMiddleware(thunk);
+  const sagaMiddleware = createSagaMiddleware();
+
+  if (IS_PRODUCTION) {
+    // In production we are adding only sagas middleware
+    middleware = applyMiddleware(sagaMiddleware);
   } else {
-    // In development mode beside thunk
+    // In development mode beside sagaMiddleware
     // logger and DevTools are added
-    middleware = applyMiddleware(thunk, logger);
+    middleware = applyMiddleware(sagaMiddleware, logger);
 
     // Enable DevTools if browser extension is installed
-    if (!process.env.SERVER_RENDER && window.__REDUX_DEVTOOLS_EXTENSION__) { // eslint-disable-line
+    if (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__) { // eslint-disable-line
       middleware = compose(
         middleware,
         window.__REDUX_DEVTOOLS_EXTENSION__() // eslint-disable-line
@@ -53,28 +47,41 @@ export default () => {
     }
   }
 
-  // Add dehydrated state if any
-  if (INIT_STATE) {
-    // Remove if you are not using server rendering
-    store = createStore(
-      rootReducer,
-      INIT_STATE,
-      middleware
-    );
-  } else {
-    store = createStore(
-      rootReducer,
-      middleware
-    );
+  // Create store
+  // with initial state if it exists
+  store = createStore(
+    rootReducer,
+    initialState,
+    middleware
+  );
+
+  // Server render
+  // Remove if you are not using server rendering
+  if (serverSagas) {
+    // Start server sagas
+    const tasks = serverSagas.map(saga => sagaMiddleware.run(saga, sagaOptions));
+
+    // Return both store and tasks
+    return {
+      tasks,
+      store,
+    };
   }
 
+  // Run root saga
+  sagaMiddleware.run(rootSaga);
+
+  // Enable Webpack hot module replacement for reducers
   if (module.hot) {
-    // Enable Webpack hot module replacement for reducers
     module.hot.accept('../reducers', () => {
       const nextRootReducer = require('../reducers/index').default; // eslint-disable-line global-require
       store.replaceReducer(nextRootReducer);
     });
   }
 
-  return store;
+  // Return store only
+  // But as an object for consistency
+  return {
+    store,
+  };
 };
