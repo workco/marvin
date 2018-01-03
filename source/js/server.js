@@ -59,8 +59,6 @@ function sendResponse(req, res, store) {
     // We're good, send the response
     res.status(context.status || 200).send(serverHtml);
   }
-
-  // TODO handle 50x errors
 }
 
 // This method will wait for all sagas to be finished
