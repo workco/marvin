@@ -9,7 +9,7 @@ import api from 'api';
 
 // -------- Get people
 
-function createGetPeope(isServer = false) {
+function createGetPeople(isServer = false) {
   return function* (options) { // eslint-disable-line consistent-return
     try {
       const data = yield call(() => api.getPeople(options.id));
@@ -32,8 +32,8 @@ function createGetPeope(isServer = false) {
   };
 }
 
-export const getPeople = createGetPeope();
-export const getPeopleServer = createGetPeope(true);
+export const getPeople = createGetPeople();
+export const getPeopleServer = createGetPeople(true);
 
 
 export function* getPeopleWatcher() {

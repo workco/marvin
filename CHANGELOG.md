@@ -28,7 +28,7 @@
 
 #### 0.1.5
 
-* `npm start` is not using `webpack-dashboard` by default cause it still has issues with Windows
+* `npm start` is not using `webpack-dashboard` by default as it still has issues with Windows
 * Moved `prop-types` from `devDependencies` to `dependencies`
 
 #### 0.1.4

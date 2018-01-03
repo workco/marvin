@@ -1,9 +1,3 @@
-// npm uninstall --save concurrently nodemon express remotedev-serialize
-// rm source/js/server.js
-// rm source/js/components/server/ServerHTML.jsx
-// rm -rf source/js/components/server/
-// rm webpack.config.server.js
-
 const { spawn } = require('child_process');
 
 const fs = require('fs');

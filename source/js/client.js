@@ -15,7 +15,7 @@ import 'index.css';
 
 const store = configureStore().store;
 
-// When used with server dehydrated date "ReactDOM.hydrate" should be called
+// When used with server dehydrated state "ReactDOM.hydrate" should be called
 const renderMethod = process.env.HYDRATE ? ReactDOM.hydrate : ReactDOM.render;
 
 renderMethod(

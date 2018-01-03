@@ -41,8 +41,8 @@ By complete we mean it has examples for:
 - routes
 - reducers (redux + redux-saga)
 - actions (both sync and async),
-- post CSS (with autoprefixer)
-- dummy API (using awesome [Start Wars API](https://swapi.co/))
+- postCSS (with autoprefixer)
+- dummy API (using awesome [Star Wars API](https://swapi.co/))
 - assets (images + inline SVGs)
 
 ## Features
@@ -213,7 +213,7 @@ with some options overridden to our preferences.
 npm run lint
 ```
 
-### Linting git hooks
+### Linting Git hooks
 
 Linting pre-push hook is not enabled by default.
 It will prevent the push if lint task fails,
