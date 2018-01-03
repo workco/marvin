@@ -23,6 +23,12 @@ const app = express();
 const hostname = 'localhost';
 const port = 8080;
 
+// ENV
+const IS_DEVELOPMENT = app.get('env') === 'development';
+
+// Disabling "Powered by" headers
+app.disable('x-powered-by');
+
 // Telling server to serve our client app build as static assets
 app.use('/client', express.static('build/client'));
 
@@ -96,8 +102,16 @@ app.use((req, res) => {
   handleRequest(req, res);
 });
 
-// Disabling "Powered by" headers
-app.disable('x-powered-by');
+// Error handling
+app.use((error, req, res) => {
+  res.status(error.status || 500);
+
+  res.render('error', {
+    message: error.message,
+    // Display stack trace only in development mode
+    error: IS_DEVELOPMENT ? error : null,
+  });
+});
 
 // Start listening
 app.listen(port, (error) => {
