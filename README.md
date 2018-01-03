@@ -247,7 +247,7 @@ Documentation is WIP, for now follow the example in `source/js/server.js`.
 
 ### Importing images in CSS
 
-Please note that paths to images in SCSS files are relative to `source/css/index.css` as it imports all of the other `.css` files.
+Please note that paths to images in CSS files are relative to `source/css/index.css` as it imports all of the other `.css` files.
 
 ```
 .BackgroundImgExample {
