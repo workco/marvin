@@ -39,8 +39,12 @@ function uninstallPackages(dependencies) {
     console.log('- remove-universal.js\n'); // eslint-disable-line no-console
 
     console.log( // eslint-disable-line no-console
-      '★★ You have to manually remove unused tasks from "package.json" ' +
-      'and unused params from "source/js/config/store.js"\n'
+      '★★ Removed server rendering dependencies and files.\n\n' +
+      '   But you have to manually remove unused code from\n' +
+      '   "source/js/config/store.js" which is marked with:\n' +
+      '   // Remove if you are not using server rendering.\n\n' +
+      '   You should remove "server" and "universal" tasks.\n' +
+      '   from "package.json" too.\n'
     );
   });
 }

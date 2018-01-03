@@ -165,16 +165,25 @@ node ./build/server.js
 
 ## Removing server rendering related stuff
 
-If you are not using server rendering just run
+If you are not using server rendering first run:
 
 ```sh
 node remove-universal.js
 ```
 
-You have to manually remove unused tasks from `package.json` and unused params from `source/js/config/store.js`.
+then you have to manually remove unused code from
+`source/js/config/store.js` which is marked with:
 
-Client app is going to work without this but, it will include few unused packages.
-Therefore it is better to remove them.
+```
+// Remove if you are not using server rendering.
+```
+
+#### Remove unused tasks
+
+You should remove unused tasks from `package.json` and unused params from `source/js/config/store.js` too.
+Client app is going to work without this but it is better to remove them as they just create noise.
+
+If anyone is willing to automate this, help will be greatly appreciated.
 
 ## Browser support
 

@@ -1,8 +1,10 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import Immutable from 'immutable';
-import Serialize from 'remotedev-serialize/immutable';
 import logger from 'dev/logger';
+
+import Immutable from 'immutable'; // Remove if you are not using server rendering
+import Serialize from 'remotedev-serialize/immutable'; // Remove if you are not using server rendering
+
 
 import rootSaga from 'sagas';
 import rootReducer from 'reducers';
