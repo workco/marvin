@@ -15,7 +15,7 @@
     "server:restart": "nodemon",
     "server:build": "cross-env SERVER_RENDER=\"true\" cross-env NODE_ENV=\"production\" webpack --config webpack.config.server.js",
     "server:dev": "npm run clean && concurrently --prefix \"[{name}]\" --names \"build-server,node-server\" --kill-others \"npm run server:watch\" \"npm run server:restart\"",
-    "universal:dev": "concurrently --prefix \"[{name}]\" --names \"build-server,build-client,node-server\" --kill-others \"npm run server:watch\" \"npm run client:watch\" \"npm run server:restart\"",
+    "universal:dev": "concurrently -c blue,cyan,yellow --names \"build-server,build-client,node-server\" --kill-others \"npm run server:watch\" \"npm run client:watch\" \"npm run server:restart\"",
     "universal:build": "npm run client:build-hydrate && npm run server:build",
     "clean": "rm -rf ./build",
     "lint-hook": "eslint ./source/js ./webpack ./*.js -f table --ext .js --ext .jsx",
