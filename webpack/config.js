@@ -123,12 +123,14 @@ const rules = [
   {
     test: /\.(eot|ttf|woff|woff2)$/,
     include: paths.fonts,
-    loader: 'url-loader',
-    options: {
-      limit: 10240,
-      name: 'fonts/[name].[ext]', // Remove hash so we can reuse in error pages
-      publicPath: './', // Workaround for CSS `url()` resolving issue
-    },
+    use: [
+      {
+        loader: 'file-loader',
+        options: {
+          name: 'client/fonts/[name]-[hash].[ext]',
+        },
+      },
+    ],
   },
 ];
 
