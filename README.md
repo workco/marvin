@@ -72,13 +72,19 @@ By complete we mean it has examples for:
 
 ## Setup
 
-Tested with node 8.5.x
+Tested with node 8.
+
+**PLEASE NOTE if you downloaded a zip, after unpacking, make sure you copy hidden (dot) files as well. A lot of people forget to do so, and project won't run without Babel configuration in `.babelrc`.**
+
+Clone or download, navigate to folder, and install dependencies:
 
 ```
 npm install
 ```
 
 ## npm tasks
+
+Once dependencies are installed following npm tasks are availble:
 
 * `start` - starts client app only in development mode, using webpack dev server
 * `client:dev` - same as `start`
@@ -243,7 +249,15 @@ npm run hook-remove
 
 ### Async server data
 
-Documentation is WIP, for now follow the example in `source/js/server.js`.
+Follow the example in `source/js/server.js`.
+
+High level concept - define list of sagas per route to resolve and store the data before returning response to the client.
+
+* When defining a saga, based on `isServer` param [return an action](https://github.com/workco/marvin/blob/master/source/js/sagas/people.js#L18-L20) instead of yielding it.
+* In `server.js` import your sagas, and [define express routes with saga dependencies](https://github.com/workco/marvin/blob/master/source/js/server.js#L90-L96). Just pass array of sagas to `handleRequest` method.
+  If you want to pass URL params add `req.params` as the fourth param.
+* On store creation these sagas will be [run on server](https://github.com/workco/marvin/blob/master/source/js/config/store.js#L58-L69) when route is matched.
+* Express server will wait [for saga tasks to finish](https://github.com/workco/marvin/blob/master/source/js/server.js#L71-L87) and preload data to client's redux store. If any of the tasks fail, store will be returned with initial data.
 
 ### Importing images in CSS
 
