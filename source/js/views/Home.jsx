@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { translate } from 'react-i18next';
+
 import { increment } from 'actions/app';
 import CircleSvg from 'svg/circle.svg';
 import SquareSvg from 'svg/square.svg';
@@ -10,11 +12,14 @@ import bookImg from 'img/book2.jpg';
 @connect(state => ({
   counter: state.app.get('counter'),
 }))
+@translate(['common'])
 export default class Home extends Component {
   static propTypes = {
     counter: PropTypes.number,
     // from react-redux connect
     dispatch: PropTypes.func,
+    t: PropTypes.func,
+    i18n: PropTypes.object,
   }
 
   handleTestButtonClick = () => {
@@ -23,9 +28,15 @@ export default class Home extends Component {
     dispatch(increment());
   }
 
+  toggleLanguage = lng => () => {
+    const { i18n } = this.props;
+    i18n.changeLanguage(lng);
+  };
+
   render() {
     const {
       counter,
+      t,
     } = this.props;
 
     return (
@@ -75,6 +86,23 @@ export default class Home extends Component {
           <CircleSvg style={ { marginRight: 10 } } />
           <SquareSvg style={ { marginRight: 10 } } />
           <TriangleSvg />
+        </div>
+
+        <h3>internationalization</h3>
+        <div className='Example'>
+          <p>{t('content.text')}</p>
+          <div>
+            <button
+              onClick={ this.toggleLanguage('en') }
+            >
+              en
+            </button>
+            <button
+              onClick={ this.toggleLanguage('pt') }
+            >
+              pt
+            </button>
+          </div>
         </div>
       </div>
     );

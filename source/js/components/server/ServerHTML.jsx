@@ -3,7 +3,7 @@ import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
 import { outputFiles } from '../../../../webpack/output-files';
 
-const ServerHTML = ({ appHtml, dehydratedState }) => (
+const ServerHTML = ({ appHtml, dehydratedState, i18n }) => (
   <html lang='en'>
     <head>
       <meta charSet='utf-8' />
@@ -21,6 +21,9 @@ const ServerHTML = ({ appHtml, dehydratedState }) => (
       <script
         dangerouslySetInnerHTML={ { __html: `var __MARVIN_DEHYDRATED_STATE = ${ dehydratedState };` } } // eslint-disable-line
       />
+      <script
+        dangerouslySetInnerHTML={ { __html: `var __MARVIN___i18n = ${ i18n };` } } // eslint-disable-line
+      />
       <script type='text/javascript' src={ `/${ outputFiles.vendor }` } />
       <script type='text/javascript' src={ `/${ outputFiles.client }` } />
     </body>
@@ -30,11 +33,12 @@ const ServerHTML = ({ appHtml, dehydratedState }) => (
 ServerHTML.propTypes = {
   appHtml: PropTypes.string,
   dehydratedState: PropTypes.string,
+  i18n: PropTypes.string,
 };
 
-const getServerHTML = (appHtml, dehydratedState = null) => {
+const getServerHTML = (appHtml, dehydratedState = null, i18n) => {
   return `<!doctype html>${ ReactDOMServer.renderToString(
-    <ServerHTML appHtml={ appHtml } dehydratedState={ dehydratedState } />
+    <ServerHTML appHtml={ appHtml } dehydratedState={ dehydratedState } i18n={ i18n } />
   ) }`;
 };
 

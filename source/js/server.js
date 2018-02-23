@@ -7,6 +7,9 @@ import express from 'express';
 import { StaticRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
+import i18nMiddleware from 'i18next-express-middleware';
+import { I18nextProvider } from 'react-i18next';
+
 import Immutable from 'immutable';
 import Serialize from 'remotedev-serialize/immutable';
 
@@ -19,6 +22,8 @@ import { getPeopleServer } from 'sagas/people';
 // Load SCSS
 import 'index.css';
 
+import i18n from './i18n-server';
+
 const app = express();
 const hostname = 'localhost';
 const port = 8080;
@@ -28,6 +33,8 @@ const IS_DEVELOPMENT = app.get('env') === 'development';
 
 // Disabling "Powered by" headers
 app.disable('x-powered-by');
+
+app.use(i18nMiddleware.handle(i18n));
 
 // Telling server to serve our client app build as static assets
 app.use('/client', express.static('build/client'));
@@ -40,17 +47,28 @@ function sendResponse(req, res, store) {
   // Context is passed to the StaticRouter and it will attach data to it directly
   const context = {};
 
+  const locale = req.language;
+  const resources = i18n.getResourceBundle(locale, 'common');
+  const i18nClient = { locale, resources };
+
+  const i18nClientSerialized = JSON.stringify(Serialize(Immutable).stringify(i18nClient));
+
+  const i18nServer = i18n.cloneInstance();
+  i18nServer.changeLanguage(locale);
+
   // Before sending the request app is rendered to a string
   const appHtml = ReactDOMServer.renderToString(
-    <Provider store={ store }>
-      <StaticRouter location={ req.url } context={ context }>
-        <App />
-      </StaticRouter>
-    </Provider>
+    <I18nextProvider i18n={ i18nServer }>
+      <Provider store={ store }>
+        <StaticRouter location={ req.url } context={ context }>
+          <App />
+        </StaticRouter>
+      </Provider>
+    </I18nextProvider>
   );
 
   // Adds rest of the HTML page
-  const serverHtml = getServerHtml(appHtml, dehydratedState);
+  const serverHtml = getServerHtml(appHtml, dehydratedState, i18nClientSerialized);
 
   // Context has url, which means `<Redirect>` was rendered somewhere
   if (context.url) {

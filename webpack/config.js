@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const paths = {
   source: path.join(__dirname, '../source'),
@@ -12,6 +13,7 @@ const paths = {
   javascript: path.join(__dirname, '../source/js'),
   svg: path.join(__dirname, '../source/assets/svg'),
   build: path.join(__dirname, '../build'),
+  locales: path.join(__dirname, '../source/locales'),
 };
 
 const outputFiles = require('./output-files').outputFiles;
@@ -30,6 +32,8 @@ const IS_PRODUCTION = NODE_ENV === 'production';
 const plugins = [
   // Extracts CSS to a file
   new ExtractTextPlugin(outputFiles.css),
+  // Copy entire locales directory to our build directory
+  new CopyWebpackPlugin([{ from: paths.locales, to: 'locales' }]),
   // Injects env variables to our app
   new webpack.DefinePlugin({
     'process.env': {
