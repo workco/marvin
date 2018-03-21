@@ -7,8 +7,7 @@ import express from 'express';
 import { StaticRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import Immutable from 'immutable';
-import Serialize from 'remotedev-serialize/immutable';
+import transit from 'transit-immutable-js';
 
 import configureStore from 'config/store';
 import getServerHtml from 'components/server/ServerHTML';
@@ -35,7 +34,7 @@ app.use('/client', express.static('build/client'));
 function sendResponse(req, res, store) {
   // Dehydrates the state
   // Serialize then another stringify to escape it
-  const dehydratedState = JSON.stringify(Serialize(Immutable).stringify(store.getState()));
+  const dehydratedState = JSON.stringify(transit.toJSON(store.getState()));
 
   // Context is passed to the StaticRouter and it will attach data to it directly
   const context = {};
