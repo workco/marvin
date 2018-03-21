@@ -42,27 +42,27 @@ const plugins = [
 
 if (IS_PRODUCTION) {
   // Shared production plugins
-  plugins.push(
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        comparisons: true,
-        conditionals: true,
-        dead_code: true,
-        drop_console: !SERVER_RENDER, // Keep server logs
-        drop_debugger: true,
-        evaluate: true,
-        if_return: true,
-        join_vars: true,
-        screw_ie8: true,
-        sequences: true,
-        unused: true,
-        warnings: false,
-      },
-      output: {
-        comments: false,
-      },
-    })
-  );
+  // plugins.push(
+  //   new webpack.optimize.UglifyJsPlugin({
+  //     compress: {
+  //       comparisons: true,
+  //       conditionals: true,
+  //       dead_code: true,
+  //       drop_console: !SERVER_RENDER, // Keep server logs
+  //       drop_debugger: true,
+  //       evaluate: true,
+  //       if_return: true,
+  //       join_vars: true,
+  //       screw_ie8: true,
+  //       sequences: true,
+  //       unused: true,
+  //       warnings: false,
+  //     },
+  //     output: {
+  //       comments: false,
+  //     },
+  //   })
+  // );
 } else {
   // Shared development plugins
   plugins.push(

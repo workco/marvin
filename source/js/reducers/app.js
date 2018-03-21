@@ -1,8 +1,6 @@
 import { Map } from 'immutable';
 
-import {
-  INCREMENT,
-} from 'actions/app';
+import { INCREMENT } from 'actions/app';
 
 const initialState = Map({
   counter: 0,

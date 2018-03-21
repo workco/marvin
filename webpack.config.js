@@ -23,15 +23,6 @@ const entry = [
 ];
 
 plugins.push(
-  // Creates vendor chunk from modules coming from node_modules folder
-  new webpack.optimize.CommonsChunkPlugin({
-    name: 'vendor',
-    filename: outputFiles.vendor,
-    minChunks(module) {
-      const context = module.context;
-      return context && context.indexOf('node_modules') >= 0;
-    },
-  }),
   // Builds index.html from template
   new HtmlWebpackPlugin({
     template: path.join(paths.source, 'index.html'),
@@ -63,6 +54,7 @@ if (IS_DEVELOPMENT) {
 
 // Webpack config
 module.exports = {
+  mode: IS_PRODUCTION ? 'production' : 'development',
   devtool: IS_PRODUCTION ? false : 'cheap-eval-source-map',
   context: paths.javascript,
   watch: !IS_PRODUCTION,
@@ -79,4 +71,20 @@ module.exports = {
   resolve,
   stats,
   devServer,
+  optimization: {
+    // Minification
+    minimize: IS_PRODUCTION,
+    // Creates vendor chunk from modules coming from node_modules folder
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          chunks: 'initial',
+          test: path.resolve(__dirname, 'node_modules'),
+          name: 'vendor',
+          filename: outputFiles.vendor,
+          enforce: true,
+        },
+      },
+    },
+  },
 };
