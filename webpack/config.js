@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const paths = {
   source: path.join(__dirname, '../source'),
@@ -29,7 +29,9 @@ const IS_PRODUCTION = NODE_ENV === 'production';
 // Shared plugins
 const plugins = [
   // Extracts CSS to a file
-  new ExtractTextPlugin(outputFiles.css),
+  new MiniCssExtractPlugin({
+    filename: outputFiles.css,
+  }),
   // Injects env variables to our app
   new webpack.DefinePlugin({
     'process.env': {
@@ -117,19 +119,17 @@ if (IS_PRODUCTION || SERVER_RENDER) {
   rules.push(
     {
       test: /\.css$/,
-      loader: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: [
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-              minimize: true,
-            },
+      use: [
+        MiniCssExtractPlugin.loader,
+        {
+          loader: 'css-loader',
+          options: {
+            importLoaders: 1,
+            minimize: true,
           },
-          'postcss-loader',
-        ],
-      }),
+        },
+        'postcss-loader',
+      ],
     }
   );
 } else {
