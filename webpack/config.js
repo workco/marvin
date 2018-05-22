@@ -165,7 +165,7 @@ if (IS_PRODUCTION || SERVER_RENDER) {
 const resolve = {
   extensions: ['.webpack-loader.js', '.web-loader.js', '.loader.js', '.js', '.jsx'],
   modules: [
-    path.join(__dirname, '../node_modules'),
+    'node_modules',
     paths.javascript,
     paths.assets,
     paths.css,
