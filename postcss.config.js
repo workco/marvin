@@ -3,7 +3,7 @@ module.exports = {
     'postcss-import': {
       path: 'source/css/',
     },
-    'postcss-cssnext': {
+    'postcss-preset-env': {
       browsers: [
         'last 2 versions',
         '> 1%',
