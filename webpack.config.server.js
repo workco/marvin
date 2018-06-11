@@ -12,6 +12,7 @@ const {
 // Webpack config
 const config = {
   target: 'node',
+  mode: IS_PRODUCTION ? 'production' : 'development',
   watch: !IS_PRODUCTION,
   devtool: IS_PRODUCTION ? false : 'source-map',
   context: paths.javascript,

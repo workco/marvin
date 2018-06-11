@@ -10,9 +10,6 @@ But as we love open source too, it is publicly available for anyone interested i
 
 Name comes from a fictional character [Marvin](https://en.wikipedia.org/wiki/Marvin_(character)), android from the [The Hitchhiker's Guide to the Galaxy](https://en.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy) book as a homage to it's author [Douglas Adams](https://en.wikipedia.org/wiki/Douglas_Adams).
 
-**Please note** that v1.0.0 switched to [redux-saga](https://github.com/redux-saga/redux-saga) from `redux-thunk`
-and [postcss](https://github.com/postcss/postcss) from `scss`.
-
 ## Table of contents
 
 * [What is this?](#user-content-what-is-this)

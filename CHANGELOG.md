@@ -1,5 +1,12 @@
 # Changelog
 
+#### 1.1.0
+
+* Updated dependencies https://github.com/workco/marvin/issues/78
+* Switched to Webpack v4 https://github.com/workco/marvin/issues/77
+* Replaced postcss-cssnext with postcss-preset-env https://github.com/workco/marvin/issues/84
+* Refactoring
+
 #### 1.0.0
 
 * Updated dependencies.

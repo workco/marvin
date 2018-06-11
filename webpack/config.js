@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const paths = {
   source: path.join(__dirname, '../source'),
@@ -29,7 +29,9 @@ const IS_PRODUCTION = NODE_ENV === 'production';
 // Shared plugins
 const plugins = [
   // Extracts CSS to a file
-  new ExtractTextPlugin(outputFiles.css),
+  new MiniCssExtractPlugin({
+    filename: outputFiles.css,
+  }),
   // Injects env variables to our app
   new webpack.DefinePlugin({
     'process.env': {
@@ -40,30 +42,7 @@ const plugins = [
   }),
 ];
 
-if (IS_PRODUCTION) {
-  // Shared production plugins
-  plugins.push(
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        comparisons: true,
-        conditionals: true,
-        dead_code: true,
-        drop_console: !SERVER_RENDER, // Keep server logs
-        drop_debugger: true,
-        evaluate: true,
-        if_return: true,
-        join_vars: true,
-        screw_ie8: true,
-        sequences: true,
-        unused: true,
-        warnings: false,
-      },
-      output: {
-        comments: false,
-      },
-    })
-  );
-} else {
+if (IS_DEVELOPMENT) {
   // Shared development plugins
   plugins.push(
     // Enables pretty names instead of index
@@ -140,19 +119,17 @@ if (IS_PRODUCTION || SERVER_RENDER) {
   rules.push(
     {
       test: /\.css$/,
-      loader: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: [
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-              minimize: true,
-            },
+      use: [
+        MiniCssExtractPlugin.loader,
+        {
+          loader: 'css-loader',
+          options: {
+            importLoaders: 1,
+            minimize: true,
           },
-          'postcss-loader',
-        ],
-      }),
+        },
+        'postcss-loader',
+      ],
     }
   );
 } else {
@@ -188,7 +165,7 @@ if (IS_PRODUCTION || SERVER_RENDER) {
 const resolve = {
   extensions: ['.webpack-loader.js', '.web-loader.js', '.loader.js', '.js', '.jsx'],
   modules: [
-    path.join(__dirname, '../node_modules'),
+    'node_modules',
     paths.javascript,
     paths.assets,
     paths.css,

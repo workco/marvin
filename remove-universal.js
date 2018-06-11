@@ -49,4 +49,4 @@ function uninstallPackages(dependencies) {
   });
 }
 
-uninstallPackages(['concurrently', 'nodemon', 'express', 'remotedev-serialize']);
+uninstallPackages(['concurrently', 'nodemon', 'express', 'transit-js', 'transit-immutable-js']);
