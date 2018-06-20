@@ -1,4 +1,4 @@
-# Marvin ★★
+# Marvin [![Work & Co](https://img.shields.io/badge/%E2%98%85%E2%98%85-Work%20&%20Co-FC3E43.svg?style=flat-square)](http://work.co)
 
 Universal React and Redux, Webpack boilerplate.
 
