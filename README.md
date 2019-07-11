@@ -1,4 +1,56 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Marvin ⭑⭑
+
+v2.0.0 beta
+
+Documentation and some features are still WIP, but Marvin is ready for production apps. Please provide us feedback to make Marvin even better.
+
+If you are looking for the old version, check [v1.1 branch](https://github.com/workco/marvin/tree/v1.1).
+
+![Marvin](/public/marvin-small.svg)
+
+React app boilerplate based on [React Create App](https://facebook.github.io/create-react-app/).
+
+Marvin is internal project by [Work & Co](https://work.co).
+We love React and open source. Marvin was born to be a starting point for our React projects.
+
+Since first released, Marvin changed a lot and now it is a (thin) opinionated wrapper around official Create React App. It adds things like typescript support, hot module reload, router and others.
+
+Name comes from a fictional character [Marvin](https://en.wikipedia.org/wiki/Marvin_(character)), android from the [The Hitchhiker's Guide to the Galaxy](https://en.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy) book as a homage to it's author [Douglas Adams](https://en.wikipedia.org/wiki/Douglas_Adams).
+
+
+## Features
+
+* React (obviously)
+* Typescript
+* Hot Module Reload
+* React router
+* Testing using [Jest](https://jestjs.io/)
+* Redux
+  * [redux-saga](https://github.com/redux-saga/redux-saga)
+  * Redux DevTools (you need to have [browser extension](https://github.com/zalmoxisus/redux-devtools-extension) installed)
+* CSS with autoprefixing ([CSS modules](https://facebook.github.io/create-react-app/docs/adding-a-css-modules-stylesheet) and SASS are optional)
+* [Importing SVG files as React components](https://facebook.github.io/create-react-app/docs/adding-images-fonts-and-files#adding-svgs)
+* Optional page snapshoting using [react-snap](https://github.com/stereobooster/react-snap)
+* Optional git hooks
+
+More features will be added in the future.
+
+## Setup
+
+Marvin was test on node version 12.x
+
+Clone this repo and run:
+
+```
+node setup.js
+```
+
+Script will take you through the short setup process. For now there are only a couple options to choose from:
+
+* SCSS support
+* Pre-Rendering Static HTML Files using [react-snap](https://github.com/stereobooster/react-snap)
+* Git hooks (run linter on commit and run tests before push)
+
 
 ## Available Scripts
 
@@ -40,5 +92,3 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
