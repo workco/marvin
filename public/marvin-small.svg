@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="90px" height="90px" viewBox="0 0 90 90" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>marvin</title>
+    <desc>Created with Sketch.</desc>
+    <g id="marvin" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle id="Oval" fill="#E5E5E5" cx="45" cy="45" r="40"></circle>
+        <path d="M18.3335052,74.8149073 C10.1500806,67.4906284 5,56.8467471 5,45 C5,22.90861 22.90861,5 45,5 C57.8703921,5 69.3210649,11.078541 76.6377997,20.5214044 C77.4761054,23.981277 77.920354,27.5951008 77.920354,31.3126844 C77.920354,56.5320588 57.4760116,76.9764012 32.2566372,76.9764012 C27.4013354,76.9764012 22.7230201,76.2186319 18.3335052,74.8149073 Z" id="Combined-Shape" fill="#FAFAFA"></path>
+        <circle id="Oval" fill="#FFFFFF" cx="31.6666667" cy="26.7109145" r="8.02359882"></circle>
+        <circle id="Oval" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" cx="45" cy="45" r="40"></circle>
+        <path d="M84.7894647,49.0269033 C75.0416965,44.7467493 60.8278116,42.0501475 45,42.0501475 C29.1664378,42.0501475 14.9479753,44.7487091 5.19991234,49.0315691" id="Oval" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M18.2811257,44.8553512 L24.2068709,50.3654886 L32.2566372,42.667449 C29.0076678,43.0301638 26.5852836,43.3364345 24.9894846,43.5862609 C23.3936856,43.8360873 21.157566,44.2591174 18.2811257,44.8553512 Z" id="Path" stroke="#000000" stroke-width="2" fill="#22B14C" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M57.7433628,44.8553512 L63.669108,50.3654886 L71.7188743,42.667449 C68.4699049,43.0301638 66.0475207,43.3364345 64.4517217,43.5862609 C62.8559227,43.8360873 60.6198031,44.2591174 57.7433628,44.8553512 Z" id="Path" stroke="#000000" stroke-width="2" fill="#22B14C" stroke-linecap="round" stroke-linejoin="round" transform="translate(64.731119, 46.516469) scale(-1, 1) translate(-64.731119, -46.516469) "></path>
+    </g>
+</svg>
