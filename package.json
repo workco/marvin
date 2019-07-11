@@ -1,5 +1,5 @@
 {
-  "name": "test",
+  "name": "marvin",
   "version": "1.0.0",
   "dependencies": {
     "@hot-loader/react-dom": "^16.8.6",
