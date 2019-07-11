@@ -39,13 +39,19 @@ More features will be added in the future.
 
 Marvin was test on node version 12.x
 
-Clone this repo and run:
+Clone this repo and install dependencies:
+
+```
+npm install
+```
+
+Now run simple setup script:
 
 ```
 node setup.js
 ```
 
-Script will take you through the short setup process. For now there are only a couple options to choose from:
+It will take you through the short setup process. For now there are only a couple options to choose from:
 
 * SCSS support
 * Pre-Rendering Static HTML Files using [react-snap](https://github.com/stereobooster/react-snap)
