@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="370px" height="370px" viewBox="0 0 370 370" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle id="Oval" fill="#E5E5E5" cx="185.5" cy="185.5" r="169.5"></circle>
+        <path d="M72.5007284,311.84067 C37.8234667,280.804038 16,235.700591 16,185.5 C16,91.8877349 91.8877349,16 185.5,16 C240.038286,16 288.560512,41.7578174 319.565176,81.771951 C323.117497,96.4331611 325,111.746739 325,127.5 C325,234.367099 238.367099,321 131.5,321 C110.925656,321 91.101293,317.788952 72.5007216,311.840667 Z" id="Combined-Shape" fill="#FAFAFA"></path>
+        <circle id="Oval" fill="#FFFFFF" cx="129" cy="108" r="34"></circle>
+        <circle id="Oval" stroke="#000000" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" cx="185.5" cy="185.5" r="169.5"></circle>
+        <path d="M354.107857,202.564003 C312.801689,184.42685 252.570352,173 185.5,173 C118.40528,173 58.1545453,184.435155 16.8471285,202.583774" id="Oval" stroke="#000000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M72.2787702,184.887051 L97.3891155,208.236258 L131.5,175.615815 C117.732492,177.152819 107.467639,178.450641 100.705441,179.509281 C93.9432428,180.56792 84.4676858,182.36051 72.2787702,184.887051 Z" id="Path" stroke="#000000" stroke-width="5" fill="#22B14C" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M239.5,184.887051 L264.610345,208.236258 L298.72123,175.615815 C284.953722,177.152819 274.688869,178.450641 267.926671,179.509281 C261.164473,180.56792 251.688916,182.36051 239.5,184.887051 Z" id="Path" stroke="#000000" stroke-width="5" fill="#22B14C" stroke-linecap="round" stroke-linejoin="round" transform="translate(269.110615, 191.926036) scale(-1, 1) translate(-269.110615, -191.926036) "></path>
+    </g>
+</svg>
