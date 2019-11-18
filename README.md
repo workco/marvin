@@ -1,6 +1,6 @@
 # Marvin ⭑⭑
 
-v2.0.0 beta
+v2.0.0
 
 Documentation and some features are still WIP, but Marvin is ready for production apps. Please provide us feedback to make Marvin even better.
 

@@ -1,5 +1,14 @@
 # Changelog
 
+
+#### 2.0.1
+
+* Updated dependencies
+
+#### 2.0.0
+
+* Major rewrite, Switched to React Create App and TypeScript
+
 #### 1.1.0
 
 * Updated dependencies https://github.com/workco/marvin/issues/78
