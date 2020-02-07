@@ -37,7 +37,7 @@ More features will be added in the future.
 
 ## Setup
 
-Marvin was test on node version 12.x
+Marvin was tested on node version 12.x
 
 Clone this repo and install dependencies:
 
