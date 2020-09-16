@@ -1,4 +1,16 @@
-# Marvin ⭑⭑
+# Marvin ⭑⭑ (deprecated)
+
+## Deprecation Notice
+
+The first version of Marvin was released in 2016. After more than four years, we have taken the decision to deprecate it.
+
+The React tooling landscape has changed significantly - for the better - since Marvin was first introduced. New platforms, libraries, developer utilities - this ecosystem continues to relentlessly evolve. Maintaining a single boilerplate to capture all these possibilities has become an unproductive endeavor.
+
+This repository will remain available for posterity, but moving forward no new features will be added or maintenance taking place. You might want to check the [Recommended Toolchains](https://reactjs.org/docs/create-a-new-react-app.html#recommended-toolchains) section on the official React website.
+
+A big thank you to everyone who used, supported, and contributed to Marvin over the years.
+
+----
 
 v2.0.0
 
